@@ -10,6 +10,8 @@ from io import StringIO
 from rest_framework.status import *
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth import authenticate, login
+
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
@@ -98,15 +100,40 @@ class TextEditorView(generics.ListCreateAPIView):
             serializer.save()
             return Response(serializer.data, status=HTTP_201_CREATED)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+
     
 def index(request):
+
     return render(request, 'onlineCoding/welcome.html')
 
 def auth(request):
     if request.method == 'GET':
-        return render(request, 'onlineCoding/authorization.html')
+        form = UserForm()
+        loginform = UserFormLogin()
+        return render(request, 'onlineCoding/authorization.html', {'form': form, 'loginform': loginform})
     elif request.method == 'POST':
-        return redirect('base')
+        loginform = UserFormLogin(request.POST)
+        if loginform.is_valid():
+            username = loginform.cleaned_data['email']
+            password = loginform.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('base')
+            else:
+                return redirect('auth')
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(**form.cleaned_data)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            request.user = user
+            return render(request, 'onlineCoding/profile.html')
+        else:
+            return render(request, 'onlineCoding/authorization.html')
+
 def base(request):
     return render(request, 'onlineCoding/base.html')
 def problems(request):
@@ -114,10 +141,25 @@ def problems(request):
     return render(request, 'onlineCoding/problems.html', {'tasks': tasks})
 
 def textEditor(request, slug):
-    task = get_object_or_404(ProgrammingTask, slug=slug)
-    return render(request, 'onlineCoding/textEditor.html', {'task': task})
-
-
+    if request.method == 'GET':
+        task = get_object_or_404(ProgrammingTask, slug=slug)
+        form = ProgrammingTaskSolutionForm()
+        if request.user.is_authenticated:
+            return render(request, 'onlineCoding/textEditor.html', {'task': task})
+        else:
+            return render(request, 'onlineCoding/problempage.html')
+    elif request.method == 'POST':
+        # create object ProgrammingTaskSolution
+        task = get_object_or_404(ProgrammingTask, slug=slug) 
+        print(request.POST)
+        form = ProgrammingTaskSolutionForm(code=request.POST['code'], user=request.user)
+        if form.is_valid():
+            new_solution = form.save(commit=False)
+            new_solution.user = request.user
+            new_solution.task = task
+            new_solution.save()
+            return redirect('textEditor', slug=slug)
+        return render(request, 'onlineCoding/textEditor.html', {'task': task})
 
 def profile(request):
     if request.method == 'GET':
@@ -129,3 +171,8 @@ def profile(request):
 def leaderboard(request):
     users = User.objects.all()
     return render(request, 'onlineCoding/leaderboard.html', {'users': users})
+
+
+def courses(request):
+    courses = Course.objects.all()
+    return render(request, 'onlineCoding/courses.html', {'courses': courses})

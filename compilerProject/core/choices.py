@@ -1,6 +1,6 @@
 ROLE_CHOICES = (
-    ('admin', 'Admin'),
-    ('user', 'User'),
+    (1, 'Admin'),
+    (0, 'User'),
 )
 
 

@@ -54,8 +54,43 @@ class ProgrammingTaskSolution(models.Model):
 
 
 
+class Course(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    slug = models.SlugField(max_length=100, unique=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_public = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Course'
+        verbose_name_plural = 'Courses'
 
 
+
+class Chapter(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    slug = models.SlugField(max_length=100, unique=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_public = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Chapter'
+        verbose_name_plural = 'Chapters'
+    
 
 
 

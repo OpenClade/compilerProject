@@ -1,0 +1,54 @@
+{% extends 'onlineCoding/base.html' %}
+{% block content %}
+    <!-- beautifull list of all courses -->
+<html>
+    <head>
+        <title>Online Coding</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body>  
+        <div class="w3-top">
+            <div class="w3-bar w3-black w3-card">
+                <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+                 
+            </div>
+        </div>
+        {% for i in courses %}
+            <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="band">
+                <div class="w3-container w3-padding-32 w3-card w3-white">
+                    <h2 class="w3-wide">{{i.name}}</h2>
+                    <p class="w3-opacity"><i>{{i.description}}</i></p>
+                    <p class="w3-opacity"><i>{{i.created_at}}</i></p>
+                    <p class="w3-opacity"><i>{{i.updated_at}}</i></p>
+                    <p class="w3-opacity"><i>{{i.user_id}}</i></p>
+                    <p class="w3-opacity"><i>{{i.id}}</i></p>
+                    <p class="w3-opacity"><i>{{i.category_id}}</i></p>
+                    <p class="w3-opacity"><i>{{i.language_id}}</i></p>
+                    <p class="w3-opacity"><i>{{i.level_id}}</i></p>
+                    <p class="w3-opacity"><i>{{i.price}}</i></p>
+                    <p class="w3-opacity"><i>{{i.duration}}</i></p>
+                    <p class="w3-opacity"><i>{{i.rating}}</i></p>
+                    <p class="w3-opacity"><i>{{i.views}}</i></p>
+                    <p class="w3-opacity"><i>{{i.status}}</i></p>
+                    <p class="w3-opacity"><i>{{i.image}}</i></p>
+                    <p class="w3-opacity"><i>{{i.video}}</i></p>
+                    <p class="w3-opacity"><i>{{i.slug}}</i></p>
+                    <p class="w3-opacity"><i>{{i.description}}</i></p
+                </div>
+            </div>
+        {% endfor %}
+    </body>
+</html>
+{% endblock %}

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import index, problems, leaderboard, auth, base, profile, textEditor
+from api.views import index, problems, leaderboard, auth, base, profile, textEditor, courses
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
@@ -27,5 +27,6 @@ urlpatterns = [
     path('base', base, name='base'),
     path('profile', profile, name='profile'),
     path('textEditor/<slug:slug>', textEditor, name='textEditor'),
-
+    path('courses', courses, name='courses'),
+    
 ]

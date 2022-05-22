@@ -27,10 +27,13 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=32) 
+    surname = models.CharField(max_length=32)
+    group = models.CharField(max_length=32)
     role = models.IntegerField(choices=ROLE_CHOICES, default=0)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     email = models.EmailField(max_length=255, unique=True)
+    rating = models.IntegerField(default=0)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

@@ -59,13 +59,15 @@
     </div>
     <br>
 
-    <form style="position: relative; margin-top: .5em;"><textarea id=editor method="POST">
+    <form style="position: relative; margin-top: .5em;" action="#"   method="post">
+        {% csrf_token %}
+        <textarea id="code" method="POST" name="code">
 def solution():
     #write here your solution
 
 solution()
 </textarea>
-        <button type="button" onclick="runCode()">Run</button>
+        <button>Run</button>
     </form>
 
     <div class="console">
