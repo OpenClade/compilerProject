@@ -1,73 +1,78 @@
 {% extends 'onlineCoding/base.html' %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Online IDE</title>
-    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Online IDE</title>
+        {% load static %}
 
-    <link rel=stylesheet href="{% static 'codemirror/lib/codemirror.css' %}">
-    <link rel=stylesheet href="{% static 'codemirror/doc/docs.css' %}">
-    <link rel=stylesheet href="{% static 'codemirror/addon/hint/show-hint.css' %}"/>
-    <link rel=stylesheet href="{% static 'onlineCoding/css/style.css' %}"/>
-    <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
-    <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
-    <script src="{% static 'codemirror/addon/edit/matchbrackets.js' %}"></script>
-    <script src="{% static 'codemirror/addon/hint/show-hint.js' %}"></script>
-    <style>
-        .CodeMirror pre {
-            padding-left: 7px;
-            line-height: 1.25;
-        }
+        <link rel=stylesheet href="{% static 'codemirror/lib/codemirror.css' %}">
+        <link rel=stylesheet href="{% static 'codemirror/doc/docs.css' %}">
+        <link rel=stylesheet href="{% static 'codemirror/addon/hint/show-hint.css' %}"/>
+        <link rel=stylesheet href="{% static 'onlineCoding/css/style.css' %}"/>
+        <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
+        <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
+        <script src="{% static 'codemirror/addon/edit/matchbrackets.js' %}"></script>
+        <script src="{% static 'codemirror/addon/hint/show-hint.js' %}"></script>
+        <style>
+            .CodeMirror pre {
+                padding-left: 7px;
+                line-height: 1.25;
+            }
 
-        .banner {
-            background: #ffc;
-            padding: 6px;
-            border-bottom: 2px solid silver;
-            text-align: center
-        }
-    </style>
-</head>
-<body>
-    <h1>
-        <p>{{ task.title }}</p>
-        <p>{{ task.description }}</p>
-        <p>{{ task.input_description}}</p>
-        <p>{{ task.output_description}}</p>
-        <p>{{ task.time_limit}}</p>
-        <p>{{ task.memory_limit }}</p>
-        <p>{{ task.author.name }}</p>
-        <p>{{ task.created_at }}</p>
-        <p>{{ task.updated_at }}</p>
-    </h1>
-<form style="position: relative; margin-top: .5em;"><textarea id=editor method="POST">
-import os
-from package import ParentClass
+            .banner {
+                background: #ffc;
+                padding: 6px;
+                border-bottom: 2px solid silver;
+                text-align: center
+            }
+        </style>
+    </head>
+    <body>
+    <div class="text-center">
 
-@nonsenseDecorator
-def doesNothing():
-    pass
-
-class ExampleClass(ParentClass):
-    @staticmethod
-    def example(inputStr):
-        a = list(inputStr)
-        a.reverse()
-        return ''.join(a)
-
-    def __init__(self, mixin = 'Hello'):
-        self.mixin = mixin
-</textarea>
-<button type="button" onclick="runCode()">Run</button>
-</form>
-
-<div class="console">
-    <div class="console-top">
-        <span class="red"></span><span class="orange"></span><span class="green"></span>
+        <h3>{{ task.title }}</h3>
+        <br>
+        <p>Difficulty: {{ task.difficulty }}</p>
+        <p>
+            Execution time limit: {{ task.time_limit }} sec<br>
+            Memory limit: {{ task.memory_limit }} Kbit
+        </p>
+        <small>Added by: {{ task.author }}</small><br>
+        <small>Added at: {{ task.created_at }}</small>
     </div>
-    <pre class="console-bg"><code class="b7126e7">
+    <p>{{ task.description }}</p>
+    <h5>Input:</h5>
+    <p>{{ task.input_description }}</p>
+    <h5>Output:</h5>
+    <p>{{ task.output_description }}</p>
+    <h4>Example:</h4>
+    <div class="input mb-2">
+        <div class="title">Input example</div>
+        <pre>{{ task.input_example }}</pre>
+    </div>
+    <div class="output">
+        <div class="title">Output example</div>
+        <pre>{{ task.output_example }}</pre>
+    </div>
+    <br>
+
+    <form style="position: relative; margin-top: .5em;"><textarea id=editor method="POST">
+def solution():
+    #write here your solution
+
+solution()
+</textarea>
+        <button type="button" onclick="runCode()">Run</button>
+    </form>
+
+    <div class="console">
+        <div class="console-top">
+            <span class="red"></span><span class="orange"></span><span class="green"></span>
+        </div>
+        <pre class="console-bg"><code class="b7126e7">
 <strong class="console-body">user@local:~# show user --info
 </strong>
 IP Address: <strong>103.214.45.149</strong>
@@ -82,20 +87,22 @@ ISP: <strong>Clouvider Limited</strong>
 
         </code>
     </pre>
-</div>
+    </div>
 
-<script>
-    const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-        mode: {name: "python",
-               version: 3,
-               singleLineStringErrors: false},
-        lineNumbers: true,
-        indentUnit: 4,
-        matchBrackets: true
-    });
-    var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
-    CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
-</script>
-</body>
-</html>
+    <script>
+        const editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+            mode: {
+                name: "python",
+                version: 3,
+                singleLineStringErrors: false
+            },
+            lineNumbers: true,
+            indentUnit: 4,
+            matchBrackets: true
+        });
+        var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
+        CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
+    </script>
+    </body>
+    </html>
 {% endblock %}
