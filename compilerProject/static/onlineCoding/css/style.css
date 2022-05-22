@@ -1,0 +1,74 @@
+
+code, .console-bg {
+    font-family: monospace, monospace;
+    font-size: 1em;
+    white-space: pre-wrap;
+    margin-bottom: 1rem;
+}
+
+code {
+    padding: 0.2rem 0.4rem;
+    font-size: 90%;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: #06b506;
+}
+
+.console-bg {
+    margin: 0;
+    background: #121d20;
+    font-size: 15px;
+    padding: 0.75rem;
+    max-width: 100%;
+    overflow: auto;
+    white-space: pre;
+    word-wrap: break-word;
+    border: #e2e6e7 1px solid;
+    border-left: #e2e6e7 5px solid;
+    border-top: #e2e6e7 5px solid;
+}
+
+.console-top {
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 100%;
+    background: #e2e6e7;
+    height: 20px;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.console-body {
+    color: #29c813;
+}
+
+.green {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #06b506;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.orange {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: orange;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.red {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: red;
+    margin-left: 5px;
+    margin-top: 5px;
+}
