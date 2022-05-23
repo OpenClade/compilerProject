@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+import api.views
 from api.views import index, problems, leaderboard, auth, base, profile, textEditor, courses
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,11 +24,12 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('', index, name='index'),
     path('auth', auth, name='auth'),
+    path('logout', api.views.logout_view, name='logout'),
     path('problems', problems, name='problems'),
     path('leaderboard', leaderboard, name='leaderboard'),
-    path('base', base, name='base'),
     path('profile', profile, name='profile'),
     path('textEditor/<slug:slug>', textEditor, name='textEditor'),
     path('courses', courses, name='courses'),
-    
+    path('course/<slug:slug>', api.views.coursePage, name='courses'),
+
 ]

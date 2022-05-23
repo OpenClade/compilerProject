@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LeaderBoard</title>
+    <title>{% block title %}LeaderBoard{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
@@ -12,38 +12,44 @@
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
     </button>
+    {% with request.resolver_match.url_name as url_name %}
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if url_name == 'leaderboard' %} active {% endif %}">
+                    <a class="nav-link" href="/leaderboard">LeaderBoard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item {% if url_name == 'problems' %} active {% endif %}">
+                    <a class="nav-link" href="/problems">Problems</a>
+                </li>
+                <li class="nav-item {% if url_name == 'courses' %} active {% endif %}">
+                    <a class="nav-link" href="/courses">Courses</a>
+                </li>
 
-    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/leaderboard">LeaderBoard <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/problems">Archive</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/courses">Courses</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Settings</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        
+            </ul>
+            {#        <form class="form-inline my-2 my-lg-0">#}
+            {#            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">#}
+            {#            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>#}
+            {#        </form>#}
+            <ul class="navbar-nav">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown {% if url_name == 'profile' %} active {% endif %}">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">{{ request.user }}</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item" href="/profile">Profile</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth">Login/Register</a>
+                    </li>
+                {% endif %}
+            </ul>
 
-    </div>
+
+        </div>
+    {% endwith %}
 </nav>
 <br>
 <br>
