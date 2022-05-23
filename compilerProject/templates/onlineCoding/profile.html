@@ -33,6 +33,11 @@
                                 <input type="text" name="group" id="group" class="form-control"
                                        value="{{ user.group }}" disabled>
                             </div>
+                            <div class="form-group">
+                                <label for="group">Rating score</label>
+                                <input type="number" id="group" class="form-control"
+                                       value="{{ user.rating }}" disabled>
+                            </div>
 {#                            <button type="submit" class="btn btn-primary">Submit</button>#}
                             <div class="text-muted"><h4>Solved Problems:</h4></div>
                             {% for solvedProblem in solvedProblems %}
