@@ -15,7 +15,9 @@
             </thead>
             <tbody>
             {% for user in users %}
-                <tr>
+                <tr {% if user.email == request.user.email %}
+                    class="bg-light"
+                {% endif %}>
                     <th scope="row">
                         {{ forloop.counter }}
                     </th>
@@ -36,7 +38,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="bg-light">
                     <th scope="row">
                         {{ place }}
                     </th>

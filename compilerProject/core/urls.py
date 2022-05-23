@@ -30,6 +30,6 @@ urlpatterns = [
     path('profile', profile, name='profile'),
     path('textEditor/<slug:slug>', textEditor, name='textEditor'),
     path('courses', courses, name='courses'),
-    path('course/<slug:slug>', api.views.coursePage, name='courses'),
+    path('course/<slug:slug>', api.views.coursePage, name='course'),
 
 ]
