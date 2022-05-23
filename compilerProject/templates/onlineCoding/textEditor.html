@@ -59,17 +59,47 @@
     </div>
     <br>
     {% if request.user.is_authenticated %}
-        <form style="position: relative; margin-top: .5em;" action="#" method="post">
+        <form style="position: relative; margin-top: .5em;" action="{{ task.slug }}" method="post">
             {% csrf_token %}
-            <textarea id="code" method="POST" name="code">
-def solution():
-    #write here your solution
-
-solution()
-</textarea>
+            {{ form.code }}
+    {% comment %} {% if task.is_solved(request.user) %}
+        <button type="submit" class="btn btn-primary" disabled>
+            <i class="fa fa-check"></i>
+            Solved
+        </button>
+    {% endif %} {% endcomment %}
+        
             <button>Run</button>
         </form>
-
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
+        {% if result %}
+            <div class="alert alert-success">
+                {{ result }}
+            </div>
+        {% endif %}
+    
+        {% if answer %}
+            <div class="alert alert-success">
+                <p>
+                    <i class="fa fa-check"></i>
+                    <strong>Success!</strong>
+                </p>
+                <p>
+                    <strong>Your answer:</strong>
+                    <pre>{{ answer }}</pre>
+                </p>
+                <p>
+                    <strong>Expected answer:</strong>
+                    <pre>{{ task.output_example }}</pre>
+                </p>
+            </div>
+           
+     
+    {% endif %} 
         <div class="console">
             <div class="console-top">
                 <span class="red"></span><span class="orange"></span><span class="green"></span>

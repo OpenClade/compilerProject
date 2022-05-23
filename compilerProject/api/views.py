@@ -13,7 +13,7 @@ from rest_framework.status import *
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-
+from core.utils import plagiarism
 
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
@@ -158,22 +158,38 @@ def textEditor(request, slug):
         task = get_object_or_404(ProgrammingTask, slug=slug)
         form = ProgrammingTaskSolutionForm()
         # if request.user.is_authenticated:
-        return render(request, 'onlineCoding/textEditor.html', {'task': task})
+        return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form})
         # else:
         #     return render(request, 'onlineCoding/problempage.html')
-    elif request.method == 'POST':
+    elif request.method == 'POST' and request.user.is_authenticated and request.POST['code']:
         # create object ProgrammingTaskSolution
         task = get_object_or_404(ProgrammingTask, slug=slug)
-        print(request.POST)
-        form = ProgrammingTaskSolutionForm(code=request.POST['code'], user=request.user)
-        if form.is_valid():
-            new_solution = form.save(commit=False)
-            new_solution.user = request.user
-            new_solution.task = task
-            new_solution.save()
-            return redirect('textEditor', slug=slug)
-        return render(request, 'onlineCoding/textEditor.html', {'task': task})
-
+        form = ProgrammingTaskSolutionForm()
+        try:
+            old_stdout = sys.stdout
+            x = StringIO()
+            mystdout = sys.stdout = x
+            exec(request.POST['code'])
+            sys.stdout = old_stdout
+        except Exception as e:
+            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'error': str(e)})
+        
+        mystdout = mystdout.getvalue().replace("\n", "")
+        if task.output_example.strip() == mystdout.strip():
+             
+            # check plagiarism with all solutions
+            solutions = ProgrammingTaskSolution.objects.all()
+            if task.max_plagiarism > 0:
+                for s in solutions: 
+                    print(plagiarism(s.code, request.POST['code']))
+                    print(task.max_plagiarism)
+                    if plagiarism(s.code, request.POST['code']) > task.max_plagiarism:
+                        return render(request, 'onlineCoding/textEditor.html', {'task': task, 'error': 'plagiarism detected'})
+            ProgrammingTaskSolution.objects.create(code=request.POST['code'], task=task, author=request.user)
+            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'answer': "you are right!"})
+        else:
+            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form' : form, 'answer': "you are not right!"})
+    return render(request, 'onlineCoding/textEditor.html', slug=slug)
 
 def profile(request):
     if request.method == 'GET':

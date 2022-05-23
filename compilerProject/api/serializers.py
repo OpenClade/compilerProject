@@ -49,17 +49,11 @@ class UserForm(forms.Form):
 
 
 class ProgrammingTaskSolutionForm(forms.Form):
-    task = forms.CharField(max_length=32, required=False)
-    author = forms.CharField(max_length=32)
-    language = forms.CharField(max_length=32, required=False)
-    code = forms.CharField(max_length=32)
-    is_public = forms.BooleanField(required=False)
-    created_at = forms.DateTimeField(required=False)
-
-
+   
+    code = forms.CharField(widget=forms.Textarea, max_length=10000, required=True )
     class Meta:
         model = ProgrammingTaskSolution
-        fields = ('task', 'author', 'language', 'code', 'is_public', 'created_at')
+        fields = ("code")
         extra_kwargs = {'author': {'read_only': True}}
 
 
