@@ -184,8 +184,20 @@ def profile(request):
 
 
 def leaderboard(request):
-    users = User.objects.all().order_by('rating').reverse()
-    return render(request, 'onlineCoding/leaderboard.html', {'users': users})
+    users = User.objects.all().order_by('-rating')
+    place = 1
+    if request.user.is_authenticated:
+        currentUser = request.user
+        for u in users:
+            pprint(u.email)
+            if u.email == currentUser.email:
+                break
+            place += 1
+    return render(request, 'onlineCoding/leaderboard.html',
+                  {
+                      'users': users,
+                      'place': place
+                  })
 
 
 def courses(request):
@@ -204,6 +216,7 @@ def coursePage(request, slug):
 def logout_view(request):
     logout(request)
     return redirect('auth')
+
 
 def not_found_view(request):
     return render(request, 'onlineCoding/404.html')

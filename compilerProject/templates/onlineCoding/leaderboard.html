@@ -14,18 +14,39 @@
             </tr>
             </thead>
             <tbody>
-           {% for user in users %}
-            <tr>
-                <th scope="row">
-                    {{ forloop.counter }}
-                </th>
-                <td>{{ user.first_name }}</td>
-                <td>{{ user.surname }}</td>
-                <td>{{ user.group }}</td>
-                <td>{{ user.rating }}</td>
-            </tr>
+            {% for user in users %}
+                <tr>
+                    <th scope="row">
+                        {{ forloop.counter }}
+                    </th>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.group }}</td>
+                    <td>{{ user.rating }}</td>
+                </tr>
             {% endfor %}
-            
+            {% if request.user.is_authenticated %}
+
+                <tr>
+                    <th scope="row">
+                        ...
+                    </th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        {{ place }}
+                    </th>
+                    <td>{{ request.user.first_name }}</td>
+                    <td>{{ request.user.surname }}</td>
+                    <td>{{ request.user.group }}</td>
+                    <td>{{ request.user.rating }}</td>
+                </tr>
+            {% endif %}
+
         </table>
         <small class="d-block text-right mt-3">
             <a href="#">All users</a>
