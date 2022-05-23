@@ -22,6 +22,8 @@ class ProgrammingTask(models.Model):
     difficulty = models.CharField(choices=DIFFICULTY_CHOICES, default='easy', max_length=10)
     max_plagiarism = models.FloatField(default=0)
     solved_count = models.IntegerField(default=0)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.title
     
@@ -37,11 +39,12 @@ class ProgrammingTaskSolution(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     language = models.IntegerField(choices=LANGUAGE_CHOICES, default=0)
     code = models.TextField()
+    isplagiarized = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_public = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-
+    plagiat = models.FloatField(default=0)
 
     def __str__(self):
         return self.task.title
@@ -86,6 +89,7 @@ class Chapter(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     banner = models.ImageField(upload_to='chapters', null=True, blank=True)
+    information = models.TextField(null=True, blank=True)
     def __str__(self):
         return self.title
     

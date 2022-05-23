@@ -37,3 +37,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+class Student(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    rating = models.IntegerField(default=0)
+    teacher = models.ForeignKey('Teacher', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.user.first_name + " " + self.user.surname
+
+
+class Teacher(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    rating = models.IntegerField(default=0)
+    uniquenumber = models.CharField(max_length=32, unique=True)
+    def __str__(self):
+        return self.user.first_name + " " + self.user.surname

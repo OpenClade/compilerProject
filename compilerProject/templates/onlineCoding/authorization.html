@@ -24,7 +24,7 @@
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="/auth" method="post">
-            {% csrf_token %}
+         
              
            <!-- set values into form  -->
           
@@ -42,9 +42,18 @@
                 </a>
             </div>  
             <span>or use your email for registration</span>
+            {% csrf_token %}
+
             {% for f in form %}
-            <input type="{{ f.type }}" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}" />
+            {% if f.name == 'password' %}
+            <input type="password" name="{{f.name}}" placeholder="{{f.label}}" value="{{f.value}}" required/>
+            {% elif f.name == 'email' %}
+            <input type="email" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}" />
+            {% else %}
+            <input type="text" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}" />
+            {% endif %}
             {% endfor %}
+            
             <button type="submit">Sign Up</button>
         </form>
     </div>
@@ -66,7 +75,11 @@
             <span>or use your account</span>
             -->
             {% for i in loginform %}
-            <input type="{{ i.type }}" name="{{ i.name }}" placeholder="{{ i.label }}" />
+            {% if i.name == 'password' %}
+            <input type="password" name="{{ i.name }}" placeholder="{{ i.label }}" />
+            {% else %}
+            <input type="text" name="{{ i.name }}" placeholder="{{ i.label }}" />
+            {% endif %}
             {% endfor %} 
             <button>Sign In</button>
         </form>

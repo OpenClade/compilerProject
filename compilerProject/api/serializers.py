@@ -1,4 +1,5 @@
 # import serializers
+from enum import unique
 from pkg_resources import require
 from rest_framework import serializers
 from main.models import * 
@@ -40,7 +41,7 @@ class UserForm(forms.Form):
     group = forms.CharField(max_length=32)
     email = forms.EmailField(max_length=255)
     password = forms.CharField(max_length=32)
-
+    unique_number = forms.CharField(max_length=32)
 
     class Meta:
         model = User

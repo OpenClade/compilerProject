@@ -1,0 +1,61 @@
+{% extends 'onlineCoding/base.html' %}
+ 
+{% block content %}
+<html>
+<head>
+    <title>Teachers page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    {% comment %}
+         all plagiarism_tasks are stored in the database as a list of strings
+    {% endcomment %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Teachers page</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>All tasks</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Teacher</th>
+                            <th>Students</th>
+                            <th>Plagiarism</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for task in plagiarism_tasks %}
+                            <tr>
+                                <td>{{ task.task }}</td> 
+                                <td>{{ task.task.teacher.user.first_name }}</td>
+                                <td> {{ task.author.first_name }}</td>
+                                <td> {{ task.plagiat}} </td>
+                            
+                            </tr>
+                    
+                        {% endfor %}
+                         
+                     </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+</html>
+
+
+
+
+{% endblock %}
