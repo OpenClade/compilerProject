@@ -94,3 +94,9 @@ code {
     background-color: #efefef;
     color: #800;
 }
+
+.equal {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}

@@ -3,9 +3,9 @@
 
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
-    mod(require("../../lib/codemirror"), require("./foldcode"));
+    mod(require("../../main/codemirror"), require("./foldcode"));
   else if (typeof define == "function" && define.amd) // AMD
-    define(["../../lib/codemirror", "./foldcode"], mod);
+    define(["../../main/codemirror", "./foldcode"], mod);
   else // Plain browser env
     mod(CodeMirror);
 })(function(CodeMirror) {

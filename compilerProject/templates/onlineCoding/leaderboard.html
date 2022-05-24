@@ -1,9 +1,9 @@
 {% extends 'onlineCoding/base.html' %}
 
 {% block content %}
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
     <div class="my-3 p-3 bg-white rounded shadow">
-        <table class="table">
+        <table class="table table-hover" id="leaderboard">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -16,44 +16,54 @@
             <tbody>
             {% for user in users %}
                 <tr {% if user.email == request.user.email %}
-                    class="bg-light"
+                    class="bg-light font-weight-bold"
                 {% endif %}>
                     <th scope="row">
                         {{ forloop.counter }}
                     </th>
-                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.first_name }}{% if user.email == request.user.email %}
+                    (you)
+                {% endif %}</td>
                     <td>{{ user.surname }}</td>
                     <td>{{ user.group }}</td>
                     <td>{{ user.rating }}</td>
                 </tr>
             {% endfor %}
-            {% if request.user.is_authenticated %}
 
-                <tr>
-                    <th scope="row">
-                        ...
-                    </th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr class="bg-light">
-                    <th scope="row">
-                        {{ place }}
-                    </th>
-                    <td>{{ request.user.first_name }}</td>
-                    <td>{{ request.user.surname }}</td>
-                    <td>{{ request.user.group }}</td>
-                    <td>{{ request.user.rating }}</td>
-                </tr>
-            {% endif %}
 
         </table>
-        <small class="d-block text-right mt-3">
-            <a href="#">All users</a>
-        </small>
+        {% if request.user.is_authenticated %}
+        <table class="table">
+            <tr>
+                <th scope="row">
+                    ...
+                </th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr class="bg-light">
+                <th scope="row">
+                    {{ place }}
+                </th>
+                <td>{{ request.user.first_name }}</td>
+                <td>{{ request.user.surname }}</td>
+                <td>{{ request.user.group }}</td>
+                <td>{{ request.user.rating }}</td>
+            </tr>
+        </table>
+        {% endif %}
     </div>
 
+{% endblock %}
 
+{% block after_script %}
+    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#leaderboard').DataTable();
+        });
+    </script>
 {% endblock %}

@@ -1,34 +1,29 @@
 {% extends 'onlineCoding/base.html' %}
 
 {% block content %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Online IDE</title>
-        {% load static %}
+    {% load static %}
 
-        <link rel=stylesheet href="{% static 'codemirror/lib/codemirror.css' %}">
-        <link rel=stylesheet href="{% static 'codemirror/doc/docs.css' %}">
-        <link rel=stylesheet href="{% static 'codemirror/addon/hint/show-hint.css' %}"/>
-        <link rel=stylesheet href="{% static 'onlineCoding/css/style.css' %}"/>
-        <script src="{% static 'codemirror/lib/codemirror.js' %}"></script>
-        <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
-        <script src="{% static 'codemirror/addon/edit/matchbrackets.js' %}"></script>
-        <script src="{% static 'codemirror/addon/hint/show-hint.js' %}"></script>
-        <style>
-            .CodeMirror pre {
-                padding-left: 7px;
-                line-height: 1.25;
-            }
+    <link rel=stylesheet href="{% static 'codemirror/main/codemirror.css' %}">
+    <link rel=stylesheet href="{% static 'codemirror/doc/docs.css' %}">
+    <link rel=stylesheet href="{% static 'codemirror/addon/hint/show-hint.css' %}"/>
+    <link rel=stylesheet href="{% static 'onlineCoding/css/style.css' %}"/>
+    <script src="{% static 'codemirror/main/codemirror.js' %}"></script>
+    <script src="{% static 'codemirror/mode/python/python.js' %}"></script>
+    <script src="{% static 'codemirror/addon/edit/matchbrackets.js' %}"></script>
+    <script src="{% static 'codemirror/addon/hint/show-hint.js' %}"></script>
+    <style>
+        .CodeMirror pre {
+            padding-left: 7px;
+            line-height: 1.25;
+        }
 
-            .banner {
-                background: #ffc;
-                padding: 6px;
-                border-bottom: 2px solid silver;
-                text-align: center
-            }
-        </style>
+        .banner {
+            background: #ffc;
+            padding: 6px;
+            border-bottom: 2px solid silver;
+            text-align: center
+        }
+    </style>
     </head>
     <body>
     <div class="text-center">
@@ -44,15 +39,19 @@
         <small>Added at: {{ task.created_at }}</small>
     </div>
     <p>{{ task.description }}</p>
-    <h5>Input:</h5>
-    <p>{{ task.input_description }}</p>
+    {% if task.input_description %}
+        <h5>Input:</h5>
+        <p>{{ task.input_description }}</p>
+    {% endif %}
     <h5>Output:</h5>
     <p>{{ task.output_description }}</p>
     <h4>Example:</h4>
-    <div class="input mb-2">
-        <div class="title">Input example</div>
-        <pre>{{ task.input_example }}</pre>
-    </div>
+    {% if task.input_example %}
+        <div class="input mb-2">
+            <div class="title">Input example</div>
+            <pre>{{ task.input_example }}</pre>
+        </div>
+    {% endif %}
     <div class="output">
         <div class="title">Output example</div>
         <pre>{{ task.output_example }}</pre>
@@ -62,14 +61,14 @@
         <form style="position: relative; margin-top: .5em;" action="{{ task.slug }}" method="post">
             {% csrf_token %}
             {{ form.code }}
-    {% comment %} {% if task.is_solved(request.user) %}
+            {% comment %} {% if task.is_solved(request.user) %}
         <button type="submit" class="btn btn-primary" disabled>
             <i class="fa fa-check"></i>
             Solved
         </button>
     {% endif %} {% endcomment %}
-        
-            <button>Run</button>
+
+            <button class="btn btn-outline-success" type="submit">Send</button>
         </form>
         {% if error %}
             <div class="alert alert-danger">
@@ -81,7 +80,7 @@
                 {{ result }}
             </div>
         {% endif %}
-    
+
         {% if answer %}
             <div class="alert alert-success">
                 <p>
@@ -90,16 +89,16 @@
                 </p>
                 <p>
                     <strong>Your answer:</strong>
-                    <pre>{{ answer }}</pre>
+                <pre>{{ answer }}</pre>
                 </p>
                 <p>
                     <strong>Expected answer:</strong>
-                    <pre>{{ task.output_example }}</pre>
+                <pre>{{ task.output_example }}</pre>
                 </p>
             </div>
-           
-     
-    {% endif %} 
+
+
+        {% endif %}
         <div class="console">
             <div class="console-top">
                 <span class="red"></span><span class="orange"></span><span class="green"></span>
@@ -121,7 +120,7 @@ ISP: <strong>Clouvider Limited</strong>
     </pre>
         </div>
     {% else %}
-    <i class="text-info"><b>Note:</b> Only authorized users can send solutions</i> 
+        <i class="text-info"><b>Note:</b> Only authorized users can send solutions</i>
     {% endif %}
     <script>
         const editor = CodeMirror.fromTextArea(document.getElementsByName("code")[0], {
@@ -134,9 +133,10 @@ ISP: <strong>Clouvider Limited</strong>
             indentUnit: 4,
             matchBrackets: true
         });
+        editor.on('change', function () {
+            document.getElementsByName("code")[0].innerText = editor.getValue();
+        })
         var mac = CodeMirror.keyMap.default == CodeMirror.keyMap.macDefault;
         CodeMirror.keyMap.default[(mac ? "Cmd" : "Ctrl") + "-Space"] = "autocomplete";
     </script>
-    </body>
-    </html>
 {% endblock %}

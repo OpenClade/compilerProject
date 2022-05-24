@@ -29,24 +29,23 @@
            <!-- set values into form  -->
           
             <h1>Create Account</h1>
-              <div class="social-container">
-                
-                <a href="#" class="social">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                </a>
-                <a href="#" class="social">
-                    <ion-icon name="logo-googleplus"></ion-icon>
-                </a>
-                <a href="#" class="social">
-                    <ion-icon name="logo-linkedin"></ion-icon>
-                </a>
-            </div>  
-            <span>or use your email for registration</span>
+{#              <div class="social-container">#}
+{#                #}
+{#                <a href="#" class="social">#}
+{#                    <ion-icon name="logo-facebook"></ion-icon>#}
+{#                </a>#}
+{#                <a href="#" class="social">#}
+{#                    <ion-icon name="logo-googleplus"></ion-icon>#}
+{#                </a>#}
+{#                <a href="#" class="social">#}
+{#                    <ion-icon name="logo-linkedin"></ion-icon>#}
+{#                </a>#}
+{#            </div>  #}
             {% csrf_token %}
 
             {% for f in form %}
             {% if f.name == 'password' %}
-            <input type="password" name="{{f.name}}" placeholder="{{f.label}}" value="{{f.value}}" required/>
+            <input type="password" name="{{f.name}}" placeholder="{{f.label}}" value="" required/>
             {% elif f.name == 'email' %}
             <input type="email" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}" />
             {% else %}

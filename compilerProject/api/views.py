@@ -17,12 +17,11 @@ from django.contrib.auth import authenticate, login, logout
 
 from core.utils import plagiarism
 
+
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-
- 
 
 class ProgrammingTaskDetail(generics.RetrieveAPIView):
     queryset = ProgrammingTask.objects.all()
@@ -100,9 +99,9 @@ def auth(request):
 
     elif request.method == 'POST':
         if request.POST.get('group'):
-            
+
             form = UserForm(request.POST)
-            exists = User.objects.filter(email=request.POST['email']).exists() 
+            exists = User.objects.filter(email=request.POST['email']).exists()
             if form.is_valid() and not exists:
                 unique_number = form.cleaned_data.pop('unique_number')
                 user = User.objects.create_user(**form.cleaned_data)
@@ -112,31 +111,29 @@ def auth(request):
                 if teacher:
                     Student.objects.create(user=user, teacher=teacher)
                 else:
-                    Student.objects.create(user=user, teacher=None) 
-                # set current user
+                    Student.objects.create(user=user, teacher=None)
+                    # set current user
                 user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
                 login(request, user)
                 return redirect('problems')
             else:
-                
                 return redirect('auth')
         else:
-           
+
             loginform = UserFormLogin(request.POST)
-            
+
             if loginform.is_valid():
-                
+
                 username = loginform.cleaned_data['email']
                 password = loginform.cleaned_data['password']
-                 
+
                 user = authenticate(username=username, password=password)
-                 
+
                 if user is not None:
                     login(request, user)
                     return redirect('problems')
                 else:
                     return redirect('auth')
-            
 
 
 def base(request):
@@ -171,29 +168,32 @@ def textEditor(request, slug):
             sys.stdout = old_stdout
         except Exception as e:
             return render(request, 'onlineCoding/textEditor.html', {'task': task, 'error': str(e)})
-        
+
         mystdout = mystdout.getvalue().replace("\n", "")
         if task.output_example.strip() == mystdout.strip():
-             
+
             # check plagiarism with all solutions
             solutions = ProgrammingTaskSolution.objects.all()
-            
+
             obj = ProgrammingTaskSolution.objects.create(code=request.POST['code'], task=task, author=request.user)
             if task.max_plagiarism > 0:
-                for s in solutions: 
-                    
+                for s in solutions:
+
                     percent = plagiarism(s.code, request.POST['code'])
-                    
+
                     if percent > task.max_plagiarism and s != obj:
-                     
                         obj.isplagiarized = True
                         obj.plagiat = round(percent, 2)
                         obj.save()
-                        return render(request, 'onlineCoding/textEditor.html', {'task': task, 'error': 'plagiarism detected'})
-            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'answer': "you are right!"})
+                        return render(request, 'onlineCoding/textEditor.html',
+                                      {'task': task, 'error': 'plagiarism detected'})
+            return render(request, 'onlineCoding/textEditor.html',
+                          {'task': task, 'form': form, 'answer': "you are right!"})
         else:
-            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form' : form, 'answer': "you are not right!"})
+            return render(request, 'onlineCoding/textEditor.html',
+                          {'task': task, 'form': form, 'answer': "you are not right!"})
     return render(request, 'onlineCoding/textEditor.html', slug=slug)
+
 
 def profile(request):
     if request.method == 'GET':
@@ -226,12 +226,10 @@ def courses(request):
 
 
 def coursePage(request, slug):
-    
     course = get_object_or_404(Course, slug=slug)
     chapters = Chapter.objects.all().filter(course=course)
     tasks = ProgrammingTask.objects.all().filter(course=course)
     return render(request, 'onlineCoding/coursePage.html', {'course': course, 'chapters': chapters, 'tasks': tasks})
-    
 
 
 def logout_view(request):
@@ -246,7 +244,9 @@ def not_found_view(request):
 def teacher(request):
     if request.method == 'GET' and Teacher.objects.all().filter(user=request.user):
         teacher = Teacher.objects.all().filter(user=request.user).first()
-        plagiarism_tasks_solution = ProgrammingTaskSolution.objects.all().filter(task__teacher=teacher, isplagiarized=True)
-        return render(request, 'onlineCoding/teachers.html', {'teacher': teacher, 'plagiarism_tasks': plagiarism_tasks_solution})
+        plagiarism_tasks_solution = ProgrammingTaskSolution.objects.all().filter(task__teacher=teacher,
+                                                                                 isplagiarized=True)
+        return render(request, 'onlineCoding/teachers.html',
+                      {'teacher': teacher, 'plagiarism_tasks': plagiarism_tasks_solution})
     else:
         return redirect('auth')
