@@ -124,7 +124,7 @@ ISP: <strong>Clouvider Limited</strong>
     <i class="text-info"><b>Note:</b> Only authorized users can send solutions</i> 
     {% endif %}
     <script>
-        const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+        const editor = CodeMirror.fromTextArea(document.getElementsByName("code")[0], {
             mode: {
                 name: "python",
                 version: 3,
