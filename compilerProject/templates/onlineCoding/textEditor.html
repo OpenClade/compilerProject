@@ -4,7 +4,7 @@
     {% load static %}
 
     <link rel=stylesheet href="{% static 'codemirror/main/codemirror.css' %}">
-    <link rel=stylesheet href="{% static 'codemirror/doc/docs.css' %}">
+{#    <link rel=stylesheet href="{% static 'codemirror/doc/docs.css' %}">#}
     <link rel=stylesheet href="{% static 'codemirror/addon/hint/show-hint.css' %}"/>
     <link rel=stylesheet href="{% static 'onlineCoding/css/style.css' %}"/>
     <script src="{% static 'codemirror/main/codemirror.js' %}"></script>
@@ -24,8 +24,6 @@
             text-align: center
         }
     </style>
-    </head>
-    <body>
     <div class="text-center">
 
         <h3>{{ task.title }}</h3>
@@ -103,8 +101,7 @@
             <div class="console-top">
                 <span class="red"></span><span class="orange"></span><span class="green"></span>
             </div>
-            <pre class="console-bg"><code class="b7126e7">
-<strong class="console-body">user@local:~# show user --info
+            <pre class="console-bg"><code class="b7126e7"><strong class="alert-{{ type }}">user@local:~# show user --info
 </strong>
 IP Address: <strong>103.214.45.149</strong>
 Device: <strong>Desktop</strong>

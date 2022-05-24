@@ -2,7 +2,9 @@
 
 {% block content %}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
-    <div class="my-3 p-3 bg-white rounded shadow">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'onlineCoding/css/style.css' %}">
+    <div class="my-3 p-3 rounded shadow text-white">
         <table class="table table-hover" id="leaderboard">
             <thead>
             <tr>
@@ -16,7 +18,7 @@
             <tbody>
             {% for user in users %}
                 <tr {% if user.email == request.user.email %}
-                    class="bg-light font-weight-bold"
+                    class="bg-dark font-weight-bold"
                 {% endif %}>
                     <th scope="row">
                         {{ forloop.counter }}
@@ -43,7 +45,7 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr class="bg-light">
+            <tr class="bg-dark">
                 <th scope="row">
                     {{ place }}
                 </th>
