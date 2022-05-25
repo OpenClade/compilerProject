@@ -158,3 +158,6 @@ input, select {
     color: #d2d2d2 !important;
 
 }
+option {
+    background-color: gray;
+}

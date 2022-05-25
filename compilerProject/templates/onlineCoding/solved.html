@@ -16,10 +16,8 @@
             <thead>
             <tr>
                 <th>Title of the task</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Plagiat</th> 
-                <th>Group</th>
+                <th>Plagiat</th>
+                <th>Status</th>
 
             </tr>
             </thead>
@@ -27,11 +25,9 @@
 
             {% for solved in solved_tasks %}
                 <tr>
-                    <td>{{ solved.task.title }}</td>
-                    <td>{{ solved.author.first_name }}</td>
-                    <td>{{ solved.author.surname }}</td>
-                    <td>{{ solved.isplagiarized }}</td> 
-                    <td>{{ solved.author.group }}</td>
+                    <td><a href="textEditor/{{solved.task.slug }}">{{ solved.task.title }}</a></td>
+                    <td>{{ solved.isplagiarized }}</td>
+                    <td>Accepted</td>
                 
                 </tr>
 

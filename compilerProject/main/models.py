@@ -1,7 +1,7 @@
 from django.db import models
 from user.models import *
 from core.choices import *
- 
+
 
 class ProgrammingTask(models.Model):
     title = models.CharField(max_length=100)
@@ -21,13 +21,15 @@ class ProgrammingTask(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True)
     rating = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Programming Task'
         verbose_name_plural = 'Programming Tasks'
+
 
 class Tests(models.Model):
     task = models.ForeignKey(ProgrammingTask, on_delete=models.CASCADE)
@@ -36,8 +38,10 @@ class Tests(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
+
     def __str__(self):
         return self.task.title
+
     class Meta:
         verbose_name = 'Test'
         verbose_name_plural = 'Tests'
@@ -53,17 +57,15 @@ class ProgrammingTaskSolution(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_public = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    plagiat = models.FloatField(default=0) 
+    plagiat = models.FloatField(default=0)
+
     def __str__(self):
         return self.task.title
-    
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Programming Task Solution'
         verbose_name_plural = 'Programming Task Solutions'
-
-
-
 
 
 class Course(models.Model):
@@ -75,15 +77,15 @@ class Course(models.Model):
     is_public = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    banner = models.ImageField(upload_to='course_banners', null=True, blank=True)
+    banner = models.ImageField(upload_to='img', null=True, blank=True)
+
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Course'
         verbose_name_plural = 'Courses'
-
 
 
 class Chapter(models.Model):
@@ -98,45 +100,11 @@ class Chapter(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     banner = models.ImageField(upload_to='chapters', null=True, blank=True)
     information = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return self.title
-    
+
     class Meta:
         ordering = ['-created_at']
         verbose_name = 'Chapter'
         verbose_name_plural = 'Chapters'
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

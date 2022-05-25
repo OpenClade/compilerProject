@@ -1,4 +1,3 @@
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,35 +23,37 @@
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="/auth" method="post">
-         
-             
-           <!-- set values into form  -->
-          
+
+
+            <!-- set values into form  -->
+
             <h1>Create Account</h1>
-{#              <div class="social-container">#}
-{#                #}
-{#                <a href="#" class="social">#}
-{#                    <ion-icon name="logo-facebook"></ion-icon>#}
-{#                </a>#}
-{#                <a href="#" class="social">#}
-{#                    <ion-icon name="logo-googleplus"></ion-icon>#}
-{#                </a>#}
-{#                <a href="#" class="social">#}
-{#                    <ion-icon name="logo-linkedin"></ion-icon>#}
-{#                </a>#}
-{#            </div>  #}
+            {#              <div class="social-container">#}
+            {#                #}
+            {#                <a href="#" class="social">#}
+            {#                    <ion-icon name="logo-facebook"></ion-icon>#}
+            {#                </a>#}
+            {#                <a href="#" class="social">#}
+            {#                    <ion-icon name="logo-googleplus"></ion-icon>#}
+            {#                </a>#}
+            {#                <a href="#" class="social">#}
+            {#                    <ion-icon name="logo-linkedin"></ion-icon>#}
+            {#                </a>#}
+            {#            </div>  #}
             {% csrf_token %}
 
             {% for f in form %}
-            {% if f.name == 'password' %}
-            <input type="password" name="{{f.name}}" placeholder="{{f.label}}" value="" required/>
-            {% elif f.name == 'email' %}
-            <input type="email" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}" />
-            {% else %}
-            <input type="text" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}" />
-            {% endif %}
+                {% if f.name == 'password' %}
+                    <input type="password" name="{{ f.name }}" placeholder="{{ f.label }}" value="" required/>
+                {% elif f.name == 'email' %}
+                    <input type="email" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}"
+                           required/>
+                {% else %}
+                    <input type="text" name="{{ f.name }}" placeholder="{{ f.label }}" value="{{ f.first_name }}"
+                           required/>
+                {% endif %}
             {% endfor %}
-            
+
             <button type="submit">Sign Up</button>
         </form>
     </div>
@@ -74,12 +75,12 @@
             <span>or use your account</span>
             -->
             {% for i in loginform %}
-            {% if i.name == 'password' %}
-            <input type="password" name="{{ i.name }}" placeholder="{{ i.label }}" />
-            {% else %}
-            <input type="text" name="{{ i.name }}" placeholder="{{ i.label }}" />
-            {% endif %}
-            {% endfor %} 
+                {% if i.name == 'password' %}
+                    <input type="password" name="{{ i.name }}" placeholder="{{ i.label }}" required/>
+                {% else %}
+                    <input type="text" name="{{ i.name }}" placeholder="{{ i.label }}" required/>
+                {% endif %}
+            {% endfor %}
             <button>Sign In</button>
         </form>
     </div>
@@ -106,4 +107,3 @@
 
 </body>
 </html>
-{% endblock %}

@@ -8,7 +8,7 @@ body {
     margin: 0
 }
 
-article, aside, footer, header, nav, section {
+article, aside, footer, header, section {
     display: block
 }
 
