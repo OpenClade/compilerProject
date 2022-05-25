@@ -17,17 +17,17 @@
             </thead>
             <tbody>
             {% for user in users %}
-                <tr {% if user.email == request.user.email %}
+                <tr {% if user.user.email == request.user.email %}
                     class="bg-dark font-weight-bold"
                 {% endif %}>
                     <th scope="row">
                         {{ forloop.counter }}
                     </th>
-                    <td>{{ user.first_name }}{% if user.email == request.user.email %}
+                    <td>{{ user.first_name }}{% if user.user.email == request.user.email %}
                     (you)
                 {% endif %}</td>
-                    <td>{{ user.surname }}</td>
-                    <td>{{ user.group }}</td>
+                    <td>{{ user.user.surname }}</td>
+                    <td>{{ user.user.group }}</td>
                     <td>{{ user.rating }}</td>
                 </tr>
             {% endfor %}

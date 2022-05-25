@@ -9,5 +9,6 @@ urlpatterns = [
     path('programmingtasksolutions/', ProgrammingTaskSolutionView.as_view()),
     path('programmingtasksolutions/<int:pk>/', ProgrammingTaskSolutionDetail.as_view()),
     path('texteditor/', TextEditorView.as_view()),
+ 
 
 ]

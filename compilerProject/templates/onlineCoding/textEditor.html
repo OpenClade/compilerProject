@@ -44,15 +44,15 @@
     <h5>Output:</h5>
     <p>{{ task.output_description }}</p>
     <h4>Example:</h4>
-    {% if task.input_example %}
+    {% if first_test.input_data %}
         <div class="input mb-2">
             <div class="title">Input example</div>
-            <pre>{{ task.input_example }}</pre>
+            <pre>{{ first_test.input_data }}</pre>
         </div>
     {% endif %}
     <div class="output">
         <div class="title">Output example</div>
-        <pre>{{ task.output_example }}</pre>
+        <pre>{{ first_test.output_data }}</pre>
     </div>
     <br>
     {% if request.user.is_authenticated %}

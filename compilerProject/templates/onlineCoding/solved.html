@@ -1,0 +1,47 @@
+{% extends 'onlineCoding/base.html' %}
+
+{% block content %}
+
+{% comment %}
+
+    list of all solved tasks solved_tasks
+    
+{% endcomment %}
+
+<div class="container">
+<h2>All your solved tasks</h2>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Title of the task</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Plagiat</th> 
+                <th>Group</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for solved in solved_tasks %}
+                <tr>
+                    <td>{{ solved.task.title }}</td>
+                    <td>{{ solved.author.first_name }}</td>
+                    <td>{{ solved.author.surname }}</td>
+                    <td>{{ solved.isplagiarized }}</td> 
+                    <td>{{ solved.author.group }}</td>
+                
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock %}

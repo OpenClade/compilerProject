@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 import api.views
-from api.views import index, problems, leaderboard, auth, base, profile, textEditor, courses, teacher
+from api.views import index, problems, leaderboard, auth, base, profile, textEditor, courses, teacher, solved
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
@@ -32,4 +32,5 @@ urlpatterns = [
     path('courses', courses, name='courses'),
     path('course/<slug:slug>', api.views.coursePage, name='course'),
     path('teacher', teacher, name='teacher'),
+    path('solved', solved, name="solved"),
 ]

@@ -42,6 +42,46 @@
             </div>
         </div>
     </div>
+    {% comment %}
+        all information about student of teacher users_of_teachers
+    {% endcomment %}
+    <div class="container">
+        <h2>All users of teacher</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th> 
+                        <th>Group</th>
+                        <th>Role</th>
+                        <th>Teacher</th> 
+                        <th>Rating</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for user in users_of_teachers %}
+                        <tr>
+                            <td>{{ user.user.first_name }}</td>
+                            <td>{{ user.user.surname }}</td>
+                            <td>{{ user.user.group }}</td>
+                            <td>{{ user.user.email }}</td> 
+                            <td>{{ user.user.role }}</td>
+                            <td>{{ teacher.user.first_name }}</td> 
+                            <td>{{ user.rating }}</td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
 {% endblock %}
 
 {% block after_script %}

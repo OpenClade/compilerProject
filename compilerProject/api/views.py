@@ -153,13 +153,17 @@ def textEditor(request, slug):
         task = get_object_or_404(ProgrammingTask, slug=slug)
         form = ProgrammingTaskSolutionForm()
         # if request.user.is_authenticated:
-        return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form})
+        first_test = Tests.objects.all().filter(task=task).first()
+        return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'first_test': first_test})
         # else:
         #     return render(request, 'onlineCoding/problempage.html')
     elif request.method == 'POST' and request.user.is_authenticated and request.POST['code']:
         # create object ProgrammingTaskSolution
         task = get_object_or_404(ProgrammingTask, slug=slug)
         form = ProgrammingTaskSolutionForm()
+        tasksolution = ProgrammingTaskSolution.objects.filter(task=task, author=request.user).first()
+        if tasksolution:
+            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'error': "You have already solved this task"})
         try:
             old_stdout = sys.stdout
             x = StringIO()
@@ -170,47 +174,53 @@ def textEditor(request, slug):
             return render(request, 'onlineCoding/textEditor.html', {'task': task, 'error': str(e)})
 
         mystdout = mystdout.getvalue().replace("\n", "")
-        if task.output_example.strip() == mystdout.strip():
+        tests = Tests.objects.all().filter(task=task)
+        for test in tests:
+            if test.output_data.strip() != mystdout.strip():
+                return render(request, 'onlineCoding/textEditor.html', {'task': task, 'error': "you are not right!"})
+        solutions = ProgrammingTaskSolution.objects.all()
 
-            # check plagiarism with all solutions
-            solutions = ProgrammingTaskSolution.objects.all()
+        obj = ProgrammingTaskSolution.objects.create(code=request.POST['code'], task=task, author=request.user)
+        if task.max_plagiarism > 0:
+            for s in solutions:
 
-            obj = ProgrammingTaskSolution.objects.create(code=request.POST['code'], task=task, author=request.user)
-            if task.max_plagiarism > 0:
-                for s in solutions:
+                percent = plagiarism(s.code, request.POST['code'])
 
-                    percent = plagiarism(s.code, request.POST['code'])
+                if percent > task.max_plagiarism and s != obj:
+                    obj.isplagiarized = True
+                    obj.plagiat = round(percent, 2)
+                    obj.save()
+                
+                    return render(request, 'onlineCoding/textEditor.html',
+                                    {'task': task, 'error': 'plagiarism detected'})
+        student = Student.objects.all().filter(user=request.user).first()
+        if student: 
+            student.rating += task.rating
+            student.save()
+        return render(request, 'onlineCoding/textEditor.html',
+                        {'task': task, 'form': form, 'answer': "you are right!"})
+    else:
+        return render(request, 'onlineCoding/textEditor.html',
+                        {'task': task, 'form': form, 'answer': "you are not right!"})
 
-                    if percent > task.max_plagiarism and s != obj:
-                        obj.isplagiarized = True
-                        obj.plagiat = round(percent, 2)
-                        obj.save()
-                        return render(request, 'onlineCoding/textEditor.html',
-                                      {'task': task, 'error': 'plagiarism detected'})
-            return render(request, 'onlineCoding/textEditor.html',
-                          {'task': task, 'form': form, 'answer': "you are right!"})
-        else:
-            return render(request, 'onlineCoding/textEditor.html',
-                          {'task': task, 'form': form, 'answer': "you are not right!"})
-    return render(request, 'onlineCoding/textEditor.html', slug=slug)
 
-
+    
 def profile(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             return render(request, 'onlineCoding/profile.html')
         else:
-            return render(request, 'onlineCoding/problempage.html')
+            return render(request, 'onlineCoding/404.html')
 
 
 def leaderboard(request):
-    users = User.objects.all().order_by('-rating')
+    users = Student.objects.all().order_by('-rating')
     place = 1
     if request.user.is_authenticated:
         currentUser = request.user
         for u in users:
-            pprint(u.email)
-            if u.email == currentUser.email:
+            pprint(u.user.email)
+            if u.user.email == currentUser.email:
                 break
             place += 1
     return render(request, 'onlineCoding/leaderboard.html',
@@ -242,11 +252,22 @@ def not_found_view(request):
 
 
 def teacher(request):
-    if request.method == 'GET' and Teacher.objects.all().filter(user=request.user):
-        teacher = Teacher.objects.all().filter(user=request.user).first()
-        plagiarism_tasks_solution = ProgrammingTaskSolution.objects.all().filter(task__teacher=teacher,
-                                                                                 isplagiarized=True)
-        return render(request, 'onlineCoding/teachers.html',
-                      {'teacher': teacher, 'plagiarism_tasks': plagiarism_tasks_solution})
-    else:
-        return redirect('auth')
+    if request.user.is_authenticated:
+        if request.method == 'GET' and Teacher.objects.all().filter(user=request.user).exists():
+            teacher = Teacher.objects.all().filter(user=request.user).first()
+            users_of_teachers = Student.objects.all().filter(teacher=teacher)
+            plagiarism_tasks_solution = ProgrammingTaskSolution.objects.all().filter(task__teacher=teacher,
+                                                                                    isplagiarized=True)
+            return render(request, 'onlineCoding/teachers.html',
+                        {'teacher': teacher, 'plagiarism_tasks': plagiarism_tasks_solution, 'users_of_teachers': users_of_teachers})
+       
+    return redirect('auth')
+
+
+
+def solved(request):
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            solved_tasks = ProgrammingTaskSolution.objects.all().filter(author=request.user)
+            return render(request, 'onlineCoding/solved.html', {'solved_tasks': solved_tasks})
+    return redirect('auth')

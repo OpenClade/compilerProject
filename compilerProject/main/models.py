@@ -7,10 +7,6 @@ class ProgrammingTask(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     slug = models.SlugField(max_length=100, unique=True, null=True)
-    input_description = models.TextField()
-    output_description = models.TextField()
-    input_example = models.TextField()
-    output_example = models.TextField()
     time_limit = models.IntegerField()
     memory_limit = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -24,6 +20,7 @@ class ProgrammingTask(models.Model):
     solved_count = models.IntegerField(default=0)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True)
+    rating = models.IntegerField(default=0)
     def __str__(self):
         return self.title
     
@@ -32,6 +29,18 @@ class ProgrammingTask(models.Model):
         verbose_name = 'Programming Task'
         verbose_name_plural = 'Programming Tasks'
 
+class Tests(models.Model):
+    task = models.ForeignKey(ProgrammingTask, on_delete=models.CASCADE)
+    input_data = models.TextField()
+    output_data = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_deleted = models.BooleanField(default=False)
+    def __str__(self):
+        return self.task.title
+    class Meta:
+        verbose_name = 'Test'
+        verbose_name_plural = 'Tests'
 
 
 class ProgrammingTaskSolution(models.Model):
@@ -44,8 +53,7 @@ class ProgrammingTaskSolution(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_public = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
-    plagiat = models.FloatField(default=0)
-
+    plagiat = models.FloatField(default=0) 
     def __str__(self):
         return self.task.title
     
