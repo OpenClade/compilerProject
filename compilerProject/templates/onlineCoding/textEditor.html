@@ -56,7 +56,7 @@
     </div>
     <br>
     {% if request.user.is_authenticated %}
-        {% if type != 'warning' %}
+        {% if type != 'warning' and type != 'success' %}
 
             <form style="position: relative; margin-top: .5em;" action="{{ task.slug }}" method="post">
                 {% csrf_token %}
@@ -71,6 +71,9 @@
                 <hr>
                 <button class="btn btn-outline-success" type="submit">Send</button>
             </form>
+        {% endif %}
+        {% if type == 'success' %}
+            <a href="/problems" class="btn btn-outline btn-primary mb-4">Back to problems</a>
         {% endif %}
 
         {% if answer or error %}

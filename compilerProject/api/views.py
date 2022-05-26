@@ -218,8 +218,9 @@ def textEditor(request, slug):
         if student:
             student.rating += task.rating
             student.save()
+        first_test = Tests.objects.all().filter(task=task).first()
         return render(request, 'onlineCoding/textEditor.html',
-                      {'task': task, 'form': form, 'type': 'success', 'answer': "Correct!"})
+                      {'task': task,'first_test': first_test, 'form': form, 'type': 'success', 'answer': "Correct!"})
     # else:
     #     return render(request, 'onlineCoding/textEditor.html',
     #                   {'task': task, 'form': form, 'answer': "you are not right!"})

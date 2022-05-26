@@ -18,12 +18,12 @@
             <tbody>
             {% for user in users %}
                 <tr {% if user.user.email == request.user.email %}
-                    class="bg-dark font-weight-bold"
+                    class="bg-light font-weight-bold"
                 {% endif %}>
                     <th scope="row">
                         {{ forloop.counter }}
                     </th>
-                    <td>{{ user.first_name }}{% if user.user.email == request.user.email %}
+                    <td>{{ user.user.first_name }}{% if user.user.email == request.user.email %}
                     (you)
                 {% endif %}</td>
                     <td>{{ user.user.surname }}</td>
@@ -45,7 +45,7 @@
                 <td></td>
                 <td></td>
             </tr>
-            <tr class="bg-dark">
+            <tr class="bg-light">
                 <th scope="row">
                     {{ place }}
                 </th>
