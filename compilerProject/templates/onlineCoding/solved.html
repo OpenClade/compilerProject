@@ -18,7 +18,7 @@
                 <th>Title of the task</th>
                 <th>Plagiat</th>
                 <th>Status</th>
-
+                <th>Rating of Task</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +28,7 @@
                     <td><a href="textEditor/{{solved.task.slug }}">{{ solved.task.title }}</a></td>
                     <td>{{ solved.isplagiarized }}</td>
                     <td>Accepted</td>
+                    <td>{{solved.task.rating }}</td>
                 
                 </tr>
 

@@ -61,15 +61,14 @@
             <form style="position: relative; margin-top: .5em;" action="{{ task.slug }}" method="post">
                 {% csrf_token %}
                 {{ form.code }}
-                {% comment %} {% if task.is_solved(request.user) %}
-        <button type="submit" class="btn btn-primary" disabled>
-            <i class="fa fa-check"></i>
-            Solved
-        </button>
-    {% endif %} {% endcomment %}
+                {% comment %}
 
-                <hr>
-                <button class="btn btn-outline-success" type="submit">Send</button>
+                create 2 buttons, one for submit and one for run
+                {% endcomment %}
+                <button type="submit" name="submit" class="btn btn-primary" style="position: absolute; right: 1;">Submit</button>
+                <button type="submit" name="run" class="btn btn-primary" style="position: absolute; right: 0;">Run</button>
+
+                <hr> 
             </form>
         {% endif %}
         {% if type == 'success' %}

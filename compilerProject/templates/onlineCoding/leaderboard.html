@@ -49,10 +49,10 @@
                 <th scope="row">
                     {{ place }}
                 </th>
-                <td>{{ request.user.first_name }}</td>
-                <td>{{ request.user.surname }}</td>
-                <td>{{ request.user.group }}</td>
-                <td>{{ request.user.rating }}</td>
+                <td>{{ currentUser.user.first_name }}</td>
+                <td>{{ currentUser.user.surname }}</td>
+                <td>{{ currentUser.user.group }}</td>
+                <td>{{ currentUser.rating }}</td>
             </tr>
         </table>
         {% endif %}

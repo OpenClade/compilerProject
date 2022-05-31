@@ -16,22 +16,22 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" id="name" class="form-control"
-                                       value="{{ user.first_name }}" disabled>
+                                       value="{{ user.user.first_name }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="surname">Surname</label>
                                 <input type="text" name="surname" id="surname" class="form-control"
-                                       value="{{ user.surname }}" disabled>
+                                       value="{{ user.user.surname }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" class="form-control"
-                                       value="{{ user.email }}" disabled>
+                                       value="{{ user.user.email }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="group">Group</label>
                                 <input type="text" name="group" id="group" class="form-control"
-                                       value="{{ user.group }}" disabled>
+                                       value="{{ user.user.group }}" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="group">Rating score</label>
@@ -39,11 +39,14 @@
                                        value="{{ user.rating }}" disabled>
                             </div>
 {#                            <button type="submit" class="btn btn-primary">Submit</button>#}
-                            <div class="text-muted"><h4>Solved Problems:</h4></div>
-                            {% for solvedProblem in solvedProblems %}
-                            {% empty %}
-                                <p>No solves problems yet</p>
-                            {% endfor %}
+                            <div class="text-muted"><h4>Total number of solved Problems:</h4></div>
+                            
+                             
+                                <div class="form-group">
+                                    <label for="group">{{ solvedProblem.problem.name }}</label>
+                                    <input type="number" id="group" class="form-control"
+                                           value="{{ problems }}" disabled>
+                                </div> 
 
                         </form>
                     </div>

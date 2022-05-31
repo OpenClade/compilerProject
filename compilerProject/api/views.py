@@ -14,7 +14,7 @@ from rest_framework.status import *
 from rest_framework.renderers import TemplateHTMLRenderer
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-
+import time
 from core.utils import plagiarism
 
 
@@ -168,8 +168,10 @@ def textEditor(request, slug):
         return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'first_test': first_test})
         # else:
         #     return render(request, 'onlineCoding/problempage.html')
-    elif request.method == 'POST' and request.user.is_authenticated and request.POST['code']:
+    
+    elif  request.method == 'POST' and 'submit' in request.POST and request.user.is_authenticated and request.POST['code']:
         # create object ProgrammingTaskSolution
+        print(request.POST)
         task = get_object_or_404(ProgrammingTask, slug=slug)
         form = ProgrammingTaskSolutionForm()
         tasksolution = ProgrammingTaskSolution.objects.filter(task=task, author=request.user).first()
@@ -185,11 +187,13 @@ def textEditor(request, slug):
                 }
             )
         try:
+            start = time.time()
             old_stdout = sys.stdout
             x = StringIO()
             mystdout = sys.stdout = x
             exec(request.POST['code'])
             sys.stdout = old_stdout
+            end = time.time()
         except Exception as e:
             return render(request, 'onlineCoding/textEditor.html', {'task': task, 'type': 'danger', 'error': str(e)})
 
@@ -219,8 +223,37 @@ def textEditor(request, slug):
             student.rating += task.rating
             student.save()
         first_test = Tests.objects.all().filter(task=task).first()
+        if end - start > first_test.task.time_limit:
+            return render(request, 'onlineCoding/textEditor.html',
+                          {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
+
         return render(request, 'onlineCoding/textEditor.html',
-                      {'task': task,'first_test': first_test, 'form': form, 'type': 'success', 'answer': "Correct!"})
+                      {'task': task,'first_test': first_test, 'form': form, 'type': 'success', 'answer': f"Correct! your time is {end - start} "})
+    
+    
+    
+    elif request.method == 'POST' and 'run' in request.POST and request.user.is_authenticated and request.POST['code']:
+        # run code
+        task = get_object_or_404(ProgrammingTask, slug=slug)
+        form = ProgrammingTaskSolutionForm()
+        try:
+            old_stdout = sys.stdout
+            x = StringIO()
+            mystdout = sys.stdout = x
+            exec(request.POST['code'])
+            sys.stdout = old_stdout
+        except Exception as e:
+            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'type': 'danger', 'error': str(e)})
+        
+        mystdout = mystdout.getvalue().replace("\n", "")
+        test = Tests.objects.all().filter(task=task).first()
+        if test.output_data.strip() != mystdout.strip():
+            return render(request, 'onlineCoding/textEditor.html',
+                          {'task': task, 'type': 'danger', 'error': "Wrong answer!"})
+        
+        return render(request, 'onlineCoding/textEditor.html',
+                      {'task': task, 'type': 'success', 'answer': "Correct!"})
+        
     # else:
     #     return render(request, 'onlineCoding/textEditor.html',
     #                   {'task': task, 'form': form, 'answer': "you are not right!"})
@@ -229,7 +262,13 @@ def textEditor(request, slug):
 def profile(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            return render(request, 'onlineCoding/profile.html')
+            user = Student.objects.all().filter(user=request.user).first()
+            if not user:
+                user = Teacher.objects.all().filter(user=request.user).first()
+            problems = ProgrammingTaskSolution.objects.all().filter(author=request.user)
+            # size of problems
+
+            return render(request, 'onlineCoding/profile.html', {'user': user, 'problems': len(problems)})
         else:
             return render(request, 'onlineCoding/404.html')
 
@@ -238,16 +277,17 @@ def leaderboard(request):
     users = Student.objects.all().order_by('-rating')
     place = 1
     if request.user.is_authenticated:
-        currentUser = request.user
+        currentUser = Student.objects.all().filter(user=request.user).first()
         for u in users:
             pprint(u.user.email)
-            if u.user.email == currentUser.email:
+            if u.user.email == currentUser.user.email:
                 break
             place += 1
     return render(request, 'onlineCoding/leaderboard.html',
                   {
                       'users': users,
-                      'place': place
+                      'place': place,
+                      'currentUser': currentUser
                   })
 
 
