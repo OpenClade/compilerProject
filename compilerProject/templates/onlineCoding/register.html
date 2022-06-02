@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorize</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'onlineCoding/css/auth.css' %}">
+</head>
+
+<body>
+
+<form class="form" method="post" action="/register">
+    {% csrf_token %}
+    <h2>Register</h2>
+    <p>Already have account? <a href="/login">Login</a></p>
+    <div class="container">
+        {% for i in form %}
+            <div class="group">
+                {% if i.name == 'password' %}
+                    <input type="password" class="input" id="{{ i.name }}" name="{{ i.name }}" placeholder=" "
+                           required/>
+                {% else %}
+                    <input type="text" class="input" id="{{ i.name }}" name="{{ i.name }}" placeholder=" " required/>
+                {% endif %}
+                <label for="{{ i.name }}" class="label">{{ i.name }}:</label>
+                <span class="line"></span>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn-submit">Register</button>
+    </div>
+</form>
+
+
+</body>
+</html>

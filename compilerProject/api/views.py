@@ -174,8 +174,9 @@ def textEditor(request, slug):
         return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'first_test': first_test})
         # else:
         #     return render(request, 'onlineCoding/problempage.html')
-    
-    elif  request.method == 'POST' and 'submit' in request.POST and request.user.is_authenticated and request.POST['code']:
+
+    elif request.method == 'POST' and 'submit' in request.POST and request.user.is_authenticated and request.POST[
+        'code']:
         # create object ProgrammingTaskSolution
         print(request.POST)
         task = get_object_or_404(ProgrammingTask, slug=slug)
@@ -234,10 +235,11 @@ def textEditor(request, slug):
                           {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
 
         return render(request, 'onlineCoding/textEditor.html',
-                      {'task': task,'first_test': first_test, 'form': form, 'type': 'success', 'answer': f"Correct! your time is {end - start} "})
-    
-    
-    
+                      {'task': task, 'first_test': first_test, 'form': form, 'type': 'success',
+                       'answer': f"Correct! your time is {end - start} "})
+
+
+
     elif request.method == 'POST' and 'run' in request.POST and request.user.is_authenticated and request.POST['code']:
         # run code
         task = get_object_or_404(ProgrammingTask, slug=slug)
@@ -250,7 +252,7 @@ def textEditor(request, slug):
             sys.stdout = old_stdout
         except Exception as e:
             return render(request, 'onlineCoding/textEditor.html', {'task': task, 'type': 'danger', 'error': str(e)})
-        
+
         mystdout = mystdout.getvalue().replace("\n", "")
         test = Tests.objects.all().filter(task=task).first()
         if test.output_data.strip() != mystdout.strip():
