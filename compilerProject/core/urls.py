@@ -19,13 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 import api.views
-from api.views import index, problems, leaderboard, auth, base, profile, textEditor, courses, teacher, solved
+from api.views import index, problems, leaderboard, loginPage, registerPage, base, profile, textEditor, courses, teacher, solved
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls')),
     path('', index, name='index'),
-    path('auth', auth, name='auth'),
+    path('login', loginPage, name='login'),
+    path('register', registerPage, name='register'),
     path('logout', api.views.logout_view, name='logout'),
     path('problems', problems, name='problems'),
     path('leaderboard', leaderboard, name='leaderboard'),

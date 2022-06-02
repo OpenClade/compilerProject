@@ -89,51 +89,57 @@ def index(request):
     return render(request, 'onlineCoding/welcome.html')
 
 
-def auth(request):
+def loginPage(request):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return redirect('problems')
+        loginform = UserFormLogin()
+        return render(request, 'onlineCoding/login.html', {'loginform': loginform})
+
+    elif request.method == 'POST':
+        loginform = UserFormLogin(request.POST)
+
+        if loginform.is_valid():
+
+            username = loginform.cleaned_data['email']
+            password = loginform.cleaned_data['password']
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('problems')
+            else:
+                return redirect('login')
+
+
+def registerPage(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             return redirect('problems')
         form = UserForm()
-        loginform = UserFormLogin()
-        return render(request, 'onlineCoding/authorization.html', {'form': form, 'loginform': loginform})
+        return render(request, 'onlineCoding/register.html', {'form': form})
 
     elif request.method == 'POST':
-        if request.POST.get('group'):
 
-            form = UserForm(request.POST)
-            exists = User.objects.filter(email=request.POST['email']).exists()
-            if form.is_valid() and not exists:
-                unique_number = form.cleaned_data.pop('unique_number')
-                user = User.objects.create_user(**form.cleaned_data)
-                user.set_password(form.cleaned_data['password'])
-                user.save()
-                teacher = Teacher.objects.all().filter(uniquenumber=unique_number).first()
-                if teacher:
-                    Student.objects.create(user=user, teacher=teacher)
-                else:
-                    Student.objects.create(user=user, teacher=None)
-                    # set current user
-                user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
-                login(request, user)
-                return redirect('problems')
+        form = UserForm(request.POST)
+        exists = User.objects.filter(email=request.POST['email']).exists()
+        if form.is_valid() and not exists:
+            unique_number = form.cleaned_data.pop('unique_number')
+            user = User.objects.create_user(**form.cleaned_data)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            teacher = Teacher.objects.all().filter(uniquenumber=unique_number).first()
+            if teacher:
+                Student.objects.create(user=user, teacher=teacher)
             else:
-                return redirect('auth')
+                Student.objects.create(user=user, teacher=None)
+                # set current user
+            user = authenticate(username=form.cleaned_data['email'], password=form.cleaned_data['password'])
+            login(request, user)
+            return redirect('problems')
         else:
-
-            loginform = UserFormLogin(request.POST)
-
-            if loginform.is_valid():
-
-                username = loginform.cleaned_data['email']
-                password = loginform.cleaned_data['password']
-
-                user = authenticate(username=username, password=password)
-
-                if user is not None:
-                    login(request, user)
-                    return redirect('problems')
-                else:
-                    return redirect('auth')
+            return redirect('register')
 
 
 def base(request):
@@ -157,14 +163,14 @@ def textEditor(request, slug):
         tasksolution = ProgrammingTaskSolution.objects.filter(task=task, author=request.user).first()
         if tasksolution:
             return render(request, 'onlineCoding/textEditor.html',
-                {
-                    'first_test': first_test,
-                    'task': task,
-                    'form': form,
-                    'type': 'warning',
-                    'error': "You have already solved this task"
-                }
-            )
+                          {
+                              'first_test': first_test,
+                              'task': task,
+                              'form': form,
+                              'type': 'warning',
+                              'error': "You have already solved this task"
+                          }
+                          )
         return render(request, 'onlineCoding/textEditor.html', {'task': task, 'form': form, 'first_test': first_test})
         # else:
         #     return render(request, 'onlineCoding/problempage.html')
@@ -178,14 +184,14 @@ def textEditor(request, slug):
         first_test = Tests.objects.all().filter(task=task).first()
         if tasksolution:
             return render(request, 'onlineCoding/textEditor.html',
-                {
-                    'first_test': first_test,
-                    'task': task,
-                    'form': form,
-                    'type': 'warning',
-                    'error': "You have already solved this task"
-                }
-            )
+                          {
+                              'first_test': first_test,
+                              'task': task,
+                              'form': form,
+                              'type': 'warning',
+                              'error': "You have already solved this task"
+                          }
+                          )
         try:
             start = time.time()
             old_stdout = sys.stdout
@@ -250,10 +256,11 @@ def textEditor(request, slug):
         if test.output_data.strip() != mystdout.strip():
             return render(request, 'onlineCoding/textEditor.html',
                           {'task': task, 'type': 'danger', 'error': "Wrong answer!"})
-        
+
+        first_test = Tests.objects.all().filter(task=task).first()
+
         return render(request, 'onlineCoding/textEditor.html',
-                      {'task': task, 'type': 'success', 'answer': "Correct!"})
-        
+                      {'task': task, 'first_test': first_test, 'form': form, 'type': 'success', 'answer': "Correct!"})
     # else:
     #     return render(request, 'onlineCoding/textEditor.html',
     #                   {'task': task, 'form': form, 'answer': "you are not right!"})
@@ -305,7 +312,7 @@ def coursePage(request, slug):
 
 def logout_view(request):
     logout(request)
-    return redirect('auth')
+    return redirect('login')
 
 
 def not_found_view(request):
@@ -323,7 +330,7 @@ def teacher(request):
                           {'teacher': teacher, 'plagiarism_tasks': plagiarism_tasks_solution,
                            'users_of_teachers': users_of_teachers})
 
-    return redirect('auth')
+    return redirect('login')
 
 
 def solved(request):
@@ -331,4 +338,4 @@ def solved(request):
         if request.method == 'GET':
             solved_tasks = ProgrammingTaskSolution.objects.all().filter(author=request.user)
             return render(request, 'onlineCoding/solved.html', {'solved_tasks': solved_tasks})
-    return redirect('auth')
+    return redirect('login')

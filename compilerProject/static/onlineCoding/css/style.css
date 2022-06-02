@@ -112,3 +112,268 @@ code {
     background-color: rgb(67, 12, 17);
     border-color: rgb(104, 18, 27);
 }
+
+.purple-gradient{
+  background: -webkit-linear-gradient(50deg,#0062cc,#7873f5)!important;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.image {
+  opacity: 1;
+  display: block;
+  width: 50%;
+  height: auto;
+  transition: .2s ease;
+  backface-visibility: hidden;
+  border-radius: 5px;
+}
+
+.middle {
+  color: black;
+  transition: .2s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.card:hover .image {
+  opacity: 0.3;
+}
+
+.card:hover .middle {
+  opacity: 1;
+}
+
+.text {
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25); /* this adds the "card" effect */
+  margin: 10px;
+  text-align: center;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.card:hover{
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.35);
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+.abs{
+	text-indent: 15px;
+}
+
+.wrapper{
+	min-height:800px;
+}
+.link-no-outline{
+	text-decoration: none;
+}
+.mynavbar{
+	background: #76C6C0;
+	font-size: 18px;
+}
+.per-0{
+	padding: 0;
+}
+.slider-back{
+	/*background: url(../images/1.jpg) no-repeat;*/
+	 -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+}
+#result{
+	/*background: url(../images/res.jpg) no-repeat;*/
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    width: 100%;
+    height: 100%;
+  	background-position: center;
+ 	background-repeat: no-repeat;
+ 	background-size: cover;
+}
+body, html {
+  height: auto;
+}
+.my-item {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+.my-item:hover {
+  background-color: #f7f7f7;
+  text-decoration: none;
+  color: inherit;
+  border-top: 0.1px solid #d8d8d8;
+  border-bottom: 0.1px solid #d8d8d8;
+}
+.mycard {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 15%;
+}
+
+.mycard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.container {
+  padding: 2px 16px;
+}
+
+  ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: -webkit-linear-gradient(50deg,#0062cc,#7873f5)!important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: -webkit-linear-gradient(-50deg,#0062cc,#7873f5)!important;
+}
+
+  .flink{
+    text-decoration: none;
+    color: #CCCDCF;
+    cursor: pointer;
+  }
+  .flink:hover{
+    text-decoration: underline;
+    color: white;
+    cursor: pointer;
+  }
+
+  input[type=search] {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    padding-left: 5px;
+    background-position: 2px 3px;
+    background-repeat: no-repeat;
+    width: 50%;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+
+  input[type=search]:focus {
+    width: 70%;
+  }
+
+ .mycontainer {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.mycontainer input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.mycheckmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.mycontainer:hover input ~ .mycheckmark {
+  background-color: #ccc;
+}
+
+.mycontainer input:checked ~ .mycheckmark {
+  background-color: #2196F3;
+}
+
+.mycheckmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.mycontainer input:checked ~ .mycheckmark:after {
+  display: block;
+}
+
+.mycontainer .mycheckmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+.avatar{
+  vertical-align: middle;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.name-text {
+  font-size:4em;
+  vertical-align: middle;
+  position: center;
+  margin-left: 20px;
+
+}
+.stext{
+  text-shadow: 1px 1px 2px black;
+}
