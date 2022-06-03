@@ -322,16 +322,56 @@ def not_found_view(request):
 
 
 def teacher(request):
+    
     if request.user.is_authenticated:
         if request.method == 'GET' and Teacher.objects.all().filter(user=request.user).exists():
+            form = CourseForm()
+            
             teacher = Teacher.objects.all().filter(user=request.user).first()
             users_of_teachers = Student.objects.all().filter(teacher=teacher)
             plagiarism_tasks_solution = ProgrammingTaskSolution.objects.all().filter(task__teacher=teacher,
                                                                                      isplagiarized=True)
             return render(request, 'onlineCoding/teachers.html',
                           {'teacher': teacher, 'plagiarism_tasks': plagiarism_tasks_solution,
-                           'users_of_teachers': users_of_teachers})
+                           'users_of_teachers': users_of_teachers, 'form': form})
 
+        elif request.method == 'POST' and Teacher.objects.all().filter(user=request.user).exists():
+            teacher = Teacher.objects.all().filter(user=request.user).first()
+            print(request.POST)
+            if 'add_student' in request.POST:
+                student = get_object_or_404(Student, user__email=request.POST['email'])
+                student.teacher = teacher
+                student.save()
+                return redirect('teacher')
+            elif 'add_task' in request.POST:
+                task = ProgrammingTask.objects.create(name=request.POST['name'],
+                                                      description=request.POST['description'],
+                                                      course=Course.objects.all().filter(slug=request.POST['course']).first(),
+                                                      teacher=teacher,
+                                                      time_limit=request.POST['time_limit'],
+                                                      max_plagiarism=request.POST['max_plagiarism'],
+                                                      rating=request.POST['rating'])
+                task.save()
+                return redirect('teacher')
+            elif 'add_chapter' in request.POST:
+                chapter = Chapter.objects.create(name=request.POST['name'],
+                                                 description=request.POST['description'],
+                                                 course=Course.objects.all().filter(slug=request.POST['course']).first(),
+                                                 teacher=teacher)
+                chapter.save()
+                return redirect('teacher')
+            elif 'add_test' in request.POST:
+                test = Tests.objects.create(input_data=request.POST['input_data'],
+                                            output_data=request.POST['output_data'],
+                                            task=ProgrammingTask.objects.all().filter(slug=request.POST['task']).first())
+                test.save()
+                return redirect('teacher')
+            elif 'add_course' in request.POST:
+                course = Course.objects.create(title=request.POST['title'],
+                                               description=request.POST['description'],
+                                               slug=request.POST['slug'],
+                                               author=teacher.user)
+                course.save
     return redirect('login')
 
 

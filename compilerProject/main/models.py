@@ -67,7 +67,7 @@ class ProgrammingTaskSolution(models.Model):
         verbose_name = 'Programming Task Solution'
         verbose_name_plural = 'Programming Task Solutions'
 
-
+# title description slug time_limit memory_limit author language 
 class Course(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()

@@ -82,6 +82,46 @@
                 </table>
             </div>
         </div>
+
+{% comment %}
+
+   add course to teacher
+
+    {% endcomment %}
+    <div class="container">
+        <h2>Add course to student</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    {% csrf_token %}
+                          {% comment %}
+                                # title description slug time_limit memory_limit author language 
+                                # create form
+                                {% endcomment %}
+                           <form method="post">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="slug">Slug</label>
+                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+                            </div>
+            
+                            
+                            <div class="form-group">
+                                <label for="language">Language</label>
+                                <input type="text" class="form-control" id="language" name="language" placeholder="Language">
+                            </div>
+                            <button type="submit" name="add_course" class="btn btn-default">Submit</button>
+
+                </form>
+            </div>
+        </div>
 {% endblock %}
 
 {% block after_script %}

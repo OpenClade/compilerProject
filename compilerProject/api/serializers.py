@@ -61,3 +61,17 @@ class ProgrammingTaskSolutionForm(forms.Form):
 class UserFormLogin(forms.Form):
     email = forms.EmailField(max_length=255)
     password = forms.CharField(max_length=32)
+
+
+# title description slug time_limit memory_limit author language 
+
+class CourseForm(forms.Form):
+    title = forms.CharField(max_length=100)
+    description = forms.TextInput()
+    slug = forms.SlugField(max_length=100)
+    banner = forms.ImageField()
+    
+    class Meta:
+        model = Course
+        fields = ('title', 'description', 'slug', 'banner')
+        extra_kwargs = {'author': {'read_only': True}}
