@@ -111,8 +111,10 @@
                                 <label for="slug">Slug</label>
                                 <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
                             </div>
-            
-                            
+                            <div class="form-group">
+                                <label for="banner">Banner</label>
+                                <input type="file" class="form-control" id="banner" name="banner" placeholder="Banner">
+                            </div>
                             <div class="form-group">
                                 <label for="language">Language</label>
                                 <input type="text" class="form-control" id="language" name="language" placeholder="Language">
@@ -122,6 +124,59 @@
                 </form>
             </div>
         </div>
+    {% comment %}
+
+        add chapter to course with fields title description slug banner course information
+    {% endcomment %}
+    <div class="container">
+        <h2>Add chapter to course</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    {% csrf_token %}
+                          {% comment %}
+                                # title description slug time_limit memory_limit author language 
+                                # create form
+                                {% endcomment %}
+                           <form method="post">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="slug">Slug</label>
+                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+                            </div>
+                            {% comment%}
+                                add image banner to chapter
+                                {% endcomment %}
+                            
+                                <div class="form-group">
+                                <label for="banner">Banner</label>
+                                <input type="file" class="form-control" id="banner" name="banner" placeholder="Banner">
+                            </div>
+
+
+                                <div class="form-group">
+                                <label for="course">Course</label>
+                                <select class="form-control" id="course" name="course">
+                                    {% for course in courses %}
+                                        <option value="{{ course.id }}">{{ course.title }}</option>
+                                    {% endfor %}
+                                </select>
+
+                            <div class="form-group">
+                                <label for="information">Information</label>
+                                <textarea class="form-control" id="information" name="information" placeholder="Information"></textarea>
+                            </div>
+                            <button type="submit" name="add_chapter" class="btn btn-default">Submit</button>
+
+                </form>
+            </div>
 {% endblock %}
 
 {% block after_script %}

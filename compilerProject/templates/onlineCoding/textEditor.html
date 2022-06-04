@@ -62,12 +62,15 @@
                 {% csrf_token %}
                 {{ form.code }}
                 {% comment %}
-
                 create 2 buttons, one for submit and one for run
                 {% endcomment %}
                 <button type="submit" name="submit" class="btn btn-primary" style="position: absolute; right: 1;">Submit</button>
                 <button type="submit" name="run" class="btn btn-primary" style="position: absolute; right: 0;">Run</button>
-
+            
+                {{ form.file }}
+                {% comment%}
+                    input file 
+                {% endcomment %}
                 <hr> 
             </form>
         {% endif %}

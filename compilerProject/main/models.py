@@ -21,7 +21,7 @@ class ProgrammingTask(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
     course = models.ForeignKey('Course', on_delete=models.CASCADE, null=True)
     rating = models.IntegerField(default=0)
-
+    file = models.FileField(null=True, blank=True)
     def __str__(self):
         return self.title
 

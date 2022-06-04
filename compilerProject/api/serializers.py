@@ -52,9 +52,10 @@ class UserForm(forms.Form):
 class ProgrammingTaskSolutionForm(forms.Form):
    
     code = forms.CharField(widget=forms.Textarea, max_length=10000, required=True )
+    file = forms.FileField(required=False)
     class Meta:
         model = ProgrammingTaskSolution
-        fields = ("code")
+        fields = ("code", "file")
         extra_kwargs = {'author': {'read_only': True}}
 
 
