@@ -8,7 +8,7 @@
           integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <!-- Boostrap Dark -->
     <!-- Bootstrap Dark by default with `prefers: light` support -->
-{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@2.0.0/dist/css/bootstrap-dark-prefers-light.min.css" />#}
+    {#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@2.0.0/dist/css/bootstrap-dark-prefers-light.min.css" />#}
 
     <link rel="stylesheet" href="{% static 'onlineCoding/css/style.css' %}">
     <link rel="icon" type="image/x-icon" href="{% static 'onlineCoding/favicon.ico' %}">
@@ -66,11 +66,12 @@
         </div>
     {% endwith %}
 </nav>
-<br>
-<br>
-<br>
-<br>
-
+{% block before-space %}
+{% endblock %}
+    <br>
+    <br>
+    <br>
+    <br>
 <main role="main" class="container">
     {% block content %}
 

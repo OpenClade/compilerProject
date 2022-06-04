@@ -1,536 +1,203 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>School</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../../static/onlineCoding/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../DataTables/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../FontAwesome/css/all.css"/>
-    <link rel="shortcut icon" href="../images/favicon.ico"/>
-</head>
-
-<body>
-
-<!--------------------Content--------------------------------->
-
-<!--------------------<SLIDER>----------------------------------->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top purple-gradient" style="margin-top: -1px;">
-    <a href="index.php">
-        <img src="../images/logo-long.png" width="150px" alt="logo">
-    </a>
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- <span class="navbar-toggler-icon"></span> -->
-        <div class="cont" onclick="myFunction(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
+{% extends 'onlineCoding/base.html' %}
+{% load static %}
+{% block before-space %}
+    <div class="">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'onlineCoding/img/slide1_2560x1080.jpg' %}" class="d-block w-100">
+                    <div class="carousel-caption d-none d-sm-block">
+                        <h1 class="stext text-center">Adaptive Learning Website</h1>
+                        <p class="stext">This website designed to become the adaptive learning system for every student
+                            or
+                            kid for each aspect of our well organized educational and social life</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'onlineCoding/img/slide2jpg.jpg' %}" class="d-block w-100">
+                    <div class="carousel-caption d-none d-sm-block">
+                        <h3 class="stext">Online Leaderboard</h3>
+                        <p class="stext">Where you can compete with friends with unique rating system</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'onlineCoding/img/slide3jpg.jpg' %}" class="d-block w-100">
+                    <div class="carousel-caption d-none d-sm-block">
+                        <h3 class="stext">Online Compiler</h3>
+                        <p class="stext">With antiplagiat system</p>
+                    </div>
+                </div>
+            </div>
+            <a href="#carouselExampleIndicators" class="carousel-control-prev" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a href="#carouselExampleIndicators" class="carousel-control-next" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a href="index.php"
-                   class="nav-link <?php $x = $_SERVER[PHP_SELF]; if(basename($x)=='index.php') echo 'active';  ?> ">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle echo" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false"><span data-toggle="tooltip" data-placement="bottom"
-                                               title="Computers and Digital Basics">Computers and DB</span></a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="lessons_cdb.php?punct=cdb0101">Lessons </a>
-                    <a class="dropdown-item" href="test_cdb.php">Tests</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item mbot" href="keyterms_cdb.php">Key Terms</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">C++</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="lessons_cpp.php?punct=cpp0101">Lessons</a>
-                    <a class="dropdown-item" href="test_cpp.php">Tests</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item mbot" href="keyterms_cpp.php">Key Terms</a>
-                    <a class="dropdown-item mbot" href="../compiler/cpp.php">Online IDE</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">HTML</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="lessons_html.php?punct=html0101">Lessons</a>
-                    <a class="dropdown-item" href="test_html.php">Tests</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item mbot" href="keyterms_html.php">Key Terms</a>
-                    <a class="dropdown-item mbot" href="../compiler/html.php">Online IDE</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true"
-                   aria-expanded="false">CSS</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="lessons_css.php?punct=css0101">Lessons</a>
-                    <a class="dropdown-item" href="test_css.php">Tests</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item mbot" href="keyterms_css.php">Key Terms</a>
-                    <a class="dropdown-item mbot" href="../compiler/html.php">Online IDE</a>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a href="contacts.php" class="nav-link active">Contacts</a>
-            </li>
-            <li class="nav-item">
-                <a href="aboutus.php" class="nav-link active">About us</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <?php if (empty($_COOKIE['username'])){ ?>
-            <span class="btn btn-light my-2 mr-sm-2" data-toggle="modal" data-target="#exampleModal2">Sign in</span>
-            <span class="btn btn-outline-light my-2 mr-sm-2" data-toggle="modal"
-                  data-target="#exampleModal">Sign up</span>
-            <?php }else {?>
-            <a href="cabinet.php"><span
-                    class="btn btn-light my-2 mr-sm-2"><?php echo '<i class="fas fa-user-circle"></i>
-                '.$_COOKIE['username']?></span></a>
-            <a href="exit.php"><span class="btn btn-outline-light my-2 mr-sm-2">Exit <i class="fas fa-sign-out-alt"></i></span></a>
-            <?php }?>
-        </form>
     </div>
-</nav>
-</div>
-<!-- NAVIGATION BAR -->
+{% endblock %}
 
-<div class="myCarousel">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li class="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="../images/1.jpg" class="d-block w-100">
-                <div class="carousel-caption d-none d-sm-block">
-                    <h1 class="stext text-center">Adaptive Learning Website</h1>
-                    <p class="stext">This website designed to become the adaptive learning system for every student or
-                        kid for each aspect of our well organized educational and social life</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../images/2.jpg" class="d-block w-100">
-                <div class="carousel-caption d-none d-sm-block">
-                    <h3 class="stext">Bilim innovation</h3>
-                    <p class="stext">If a student is struggling academically, it’s important for you to contact the host
-                        family, Local Coordinator, or the CIEE Support Team to discuss concerns. Once we are aware of a
-                        problem, we can help our participant understand what’s expected of him or her, and provide
-                        resources to assist as needed.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="../images/3.jpg" class="d-block w-100">
-                <div class="carousel-caption d-none d-sm-block">
-                    <h3 class="stext">With leading-edge faculty and world-renowned</h3>
-                    <p class="stext">If a student is struggling academically, it’s important for you to contact the host
-                        family, Local Coordinator, or the CIEE Support Team to discuss concerns. Once we are aware of a
-                        problem, we can help our participant understand what’s expected of him or her, and provide
-                        resources to assist as needed.</p>
-                </div>
-            </div>
-        </div>
-        <a href="#carouselExampleIndicators" class="carousel-control-prev" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a href="#carouselExampleIndicators" class="carousel-control-next" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div>
-<!--------------------<SLIDER/>----------------------------------->
+{% block content %}
+    <!--------------------Content--------------------------------->
 
-<div class="wrapper">
-    <div class="content">
-        <div class="container">
-            <br><br>
-            <div class="row">
+    <!--------------------<SLIDER>----------------------------------->
+    <!-- NAVIGATION BAR -->
+    <!--------------------<SLIDER/>----------------------------------->
 
-                <div class="column col-md-3">
+    <div class="wrapper">
+        <div class="content">
+            <div class="container">
+                <br><br>
+                <div class="row">
+                    {% for course in courses %}
 
-                    <a href="#PCDB" style="text-decoration: none;">
-                        <div class="card">
-                            <img src="../images/database.jpg" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="text">
-                                    <h3 class="stext" style="font-size: 20px">PC and DB</h3>
-                                    <p style="font-size: 12px">Computer and Digital Basics. The basic concepts of
-                                        programming knowledge</p>
+                        <div class="column col-md-3">
+
+                            <a href="{% url 'course' course.slug %}" style="text-decoration: none;">
+                                <div class="card">
+                                    <img src="{{ course.banner }}" class="image" style="width:100%;">
+                                    <div class="middle">
+                                        <div class="text">
+                                            <h3 class="stext" style="font-size: 20px">{{ course.title }}</h3>
+                                            <p style="font-size: 12px">{{ course.description }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
+                    {% endfor %}
 
-                <div class="column col-md-3">
-                    <a href="#CPP" style="text-decoration: none;">
-                        <div class="card">
-                            <img src="../images/cpp.jpg" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="text">
-                                    <h3 class="stext">C++</h3>
-                                    <p style="font-size: 13px">is a high-level, general-purpose programming language</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="column col-md-3">
-                    <a href="#HTML" style="text-decoration: none;">
-                        <div class="card">
-                            <img src="../images/html.jpg" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="text">
-                                    <h3 class="stext">HTML</h3>
-                                    <p>Hypertext Markup Language</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="column col-md-3">
-                    <a href="#JAVA" style="text-decoration: none;">
-                        <div class="card">
-                            <img src="../images/css.jpg" class="image" style="width:100%">
-                            <div class="middle">
-                                <div class="text">
-                                    <h4 class="stext">CSS</h4>
-                                    <p>used to describe the view of a document in HTML</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a name="PCDB"></a>
-                    <br>
                 </div>
 
             </div>
-
-        </div>
-        <div class="container">
-            <br><br>
-            <div class="row">
-                <div class="col-lg-6 col-sm-12">
-                    <h1>Computers and Digital Basics</h1>
-                    <br>
-                    <p class="text-justify">The information in this chapter will give you the
-                        background to:<br><br>
-                        - Inventory the digital devices
-                        you own<br><br>
-                        - Put digital technology in
-                        the context of history, pop
-                        culture, and the global
-                        economy<br><br>
-                        - Read computer ads with an
-                        understanding of technical
-                        terminology<br><br>
-                        - Select secure passwords for
-                        protecting your computer
-                        and Internet logins<br><br>
-                        - Use a password manager
-                        to keep track of all your
-                        passwords<br><br>
-                        - Use digital devices with an
-                        awareness of how they might
-                        infringe on your privacy
-                    </p>
-                    <a href="lessons_cdb.php?punct=cdb0101"><span class="btn btn-outline-success">Learn more</span></a>
-                </div>
-                <div class="col-lg-6 mt-sm-3" style="	background: url(../images/nout.jpg) no-repeat ;
+            <div class="container">
+                <br><br>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <h1>Our main goal</h1>
+                        <br>
+                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum
+                        </p>
+                        {#                        <a href=""><span class="btn btn-outline-success">Learn more</span></a>#}
+                    </div>
+                    <div class="col-lg-6 mt-sm-3" style="	background: url(../images/nout.jpg) no-repeat ;
 		-moz-background-size: 100%; 
 		-webkit-background-size: 100%; 
 		-o-background-size: 100%; 
 		background-size: 100%;
 		min-height: 20rem">
+                    </div>
                 </div>
-            </div>
-            <a name="HTML"></a>
-            <br><br><br>
-            <div class="row">
-                <div class="col-lg-6" style="	background: url(../images/monitor.jpg) no-repeat;
+                <a name="HTML"></a>
+                <br><br><br>
+                <div class="row">
+                    <div class="col-lg-6" style="	background: url(../images/monitor.jpg) no-repeat;
 		-moz-background-size: 100%; 
 		-webkit-background-size: 100%; 
 		-o-background-size: 100%; 
 		background-size: 100%;
 		min-height: 20rem">
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <h1>Our advantages</h1>
+                        <br>
+                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum</p>
+                        {#                        <a href=""><span#}
+                        {#                                class="btn btn-outline-success">Learn more</span></a>#}
+                    </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
-                    <h1>HTML Online Training</h1>
-                    <br>
-                    <p class="text-justify">Hypertext Markup Language (HTML) is the standard markup language for
-                        documents designed to be displayed in a web browser. It can be assisted by technologies such as
-                        Cascading Style Sheets (CSS) and scripting languages such as JavaScript. Web browsers receive
-                        HTML documents from a web server or from local storage and render the documents into multimedia
-                        web pages. HTML describes the structure of a web page semantically and originally included cues
-                        for the appearance of the document. HTML elements are the building blocks of HTML pages. With
-                        HTML constructs, images and other objects such as interactive forms may be embedded into the
-                        rendered page. HTML provides a means to create structured documents by denoting structural
-                        semantics for text such as headings, paragraphs, lists, links, quotes and other items. HTML
-                        elements are delineated by tags, written using angle brackets. Tags such as <img/> and >input />
-                        directly introduce content into the page. Other tags such as
-                    <p> surround and provide information about document text and may include other tags as sub-elements.
-                        Browsers do not display the HTML tags, but use them to interpret the content of the page.</p>
-                    <a href="lessons_html.php?punct=html0101"><span
-                            class="btn btn-outline-success">Learn more</span></a>
-                </div>
-            </div>
-            <a name="JAVA"></a>
-            <br><br><br>
-            <div class="row">
-                <div class="col-lg-6 col-sm-12">
-                    <h1>CSS Online Training</h1>
-                    <p class="text-justify">Cascading Style Sheets (CSS) is a style sheet language used for describing
-                        the presentation of a document written in a markup language like HTML.[1] CSS is a cornerstone
-                        technology of the World Wide Web, alongside HTML and JavaScript. CSS is designed to enable the
-                        separation of presentation and content, including layout, colors, and fonts. This separation can
-                        improve content accessibility, provide more flexibility and control in the specification of
-                        presentation characteristics, enable multiple web pages to share formatting by specifying the
-                        relevant CSS in a separate .css file, and reduce complexity and repetition in the structural
-                        content.</p>
-                    <a href="lessons_css.php?punct=css0101"><span class="btn btn-outline-success">Learn more</span></a>
-                </div>
-                <div class="col-lg-6 mt-3" style="	background: url(../images/css.png) no-repeat ;
+                <a name="JAVA"></a>
+                <br><br><br>
+                <div class="row">
+                    <div class="col-lg-6 col-sm-12">
+                        <h1>Why choose us?</h1>
+                        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                            in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+                            laborum
+                        </p>
+{#                        <a href=""><span class="btn btn-outline-success">Learn more</span></a>#}
+                    </div>
+                    <div class="col-lg-6 mt-3" style="	background: url(../images/css.png) no-repeat ;
 			-moz-background-size: 100%; 
 		-webkit-background-size: 100%; 
 		-o-background-size: 100%; 
 		background-size: 100%;
 		min-height: 15em">
-                </div>
-            </div>
-            <a name="CPP"></a>
-            <br><br><br>
-            <div class="row">
-                <div class="col-lg-6" style="	background: url(../images/cppban.jpg) no-repeat;
-		 	-moz-background-size: 100%; 
-			-webkit-background-size: 100%; 
-			-o-background-size: 100%; 
-			background-size: 100%;
-			min-height: 20rem">
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <h1>C++ Online Training</h1>
-                    <p class="text-justify">C++ is is a general-purpose programming language that was developed by
-                        Bjarne Stroustrup as an extension of the C language, or "C with Classes". It has imperative,
-                        object-oriented and generic programming features, while also providing facilities for low-level
-                        memory manipulation. It is almost always implemented as a compiled language, and many vendors
-                        provide C++ compilers, including the Free Software Foundation, Microsoft, Intel, and IBM, so it
-                        is available on many platforms<br>C++ was designed with a bias toward system programming and
-                        embedded, resource-constrained software and large systems, with performance, efficiency, and
-                        flexibility of use as its design highlights.[7] C++ has also been found useful in many other
-                        contexts, with key strengths being software infrastructure and resource-constrained
-                        applications,[7] including desktop applications, video games, servers (e.g. e-commerce, Web
-                        search, or SQL servers), and performance-critical applications (e.g. telephone switches or space
-                        probes).[8]
-
-                    </p>
-                    <a href="lessons_cpp.php?punct=cpp0101"><span class="btn btn-outline-success">Learn more</span></a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-<!-----------------------Sign in-------------------------------------->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labellebdy="exampleModal2"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sign in <i class="far fa-sign-in-alt"></i></h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
-                <i class="far fa-times"></i>
-            </div>
-            <div class="modal-body">
-                <div>
-                    <div class="form-group">
-                        <label for="email" required>Email addess</label>
-                        <input type="email" name="mail" class="form-control" id="mail" aria-describdy="emailhelp"
-                               placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="passwors">Password</label>
-                        <input type="password" name="pass" class="form-control" id="pass" aria-describdy="passwordhelp"
-                               placeholder="Password" required>
-                    </div>
-                    <button type="submit" name="signin" id="signin" class="btn btn-success">Log in</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-----------------------Sign up-------------------------------------->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labellebdy="exampleModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form registration <i class="fas fa-user-plus"
-                                                                                    style="font-size: 0.85rem !important"
-                                                                                    style="margin-bottom: : 0 !important"></i>
-                </h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"></button>
-                <i class="far fa-times"></i>
-            </div>
-            <div class="modal-body">
-                <div id="formsignup">
-                    <div class="row">
-                        <div class="form-group col-lg-6 col-sm-12">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" aria-describdy="namehelp"
-                                   placeholder="Name" required>
-                            <small id="namehelp" class="form-text text-muted">Enter your name</small>
-                        </div>
-                        <div class="form-group col-lg-6 col-sm-12">
-                            <label for="surname">Surname</label>
-                            <input type="text" name="surname" class="form-control" id="surname"
-                                   aria-describdy="surnamehelp" placeholder="Surname" required>
-                            <small id="surnamehelp" class="form-text text-muted">Enter your surname</small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email addess</label>
-                        <input type="email" name="email" class="form-control" id="email" aria-describdy="emailhelp"
-                               placeholder="Sample@example.com" required>
-                        <small id="emailhelp" class="form-text text-muted">Enter your email</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="passwors">Password</label>
-                        <input type="password" name="password" class="form-control" id="password"
-                               aria-describdy="passwordhelp" placeholder="password" required>
-                        <small id="passwordhelp" class="form-text text-muted">The password must contain at least 8 and
-                            no more than 15 characters</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="passwors">Confirm password</label>
-                        <input type="password" name="password1" class="form-control" id="password1"
-                               aria-describdy="passwordhelp" placeholder="Password Repeat" required>
-                        <small id="passwordhelp" class="form-text text-muted">Repeat password</small>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                            <label for="grade">Grade</label>
-                            <select name="grade" class="form-control" id="grade" required="required">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
-                            <label for="letter">Class</label>
-                            <select name="letter" class="form-control" id="letter" required="required">
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <button type="submit" name="signup" id="signup" class="btn btn-success">Sign up</button>
-                        </div>
-                        <div class="col-6">
-                            <span class="text-danger" id="error"></span><br>
-                        </div>
-
-
                     </div>
                 </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!---------------------------------------footer------------------->
-<br><br>
-</div>
-<div class="container-fluid purple-gradient footer">
-    <div class="container">
-        <div class="row" style="color: #fff;">
-            <div class="col-lg-4 col-sm-6 ">
-                <br>
-                <h5>Contacts <i class="far fa-phone-office"></i></i></i></h5><br>
-                <b>Phone number:</b>
-                <span>+7(7142) 22-23-24</span>
-                <br><br>
-                <b>Mobilephone:</b>
-                <span>+7(775) 838-35-43</span>
+                <a name="CPP"></a>
                 <br><br><br>
-                <div class="dropdown-divider"></div>
-                <br><br>
-            </div>
 
-            <div class="col-lg-4 col-sm-6 ">
-                <br>
-                <h5>Adress <i class="far fa-city"></i></h5><br>
-                <b>Adress:</b>
-                <span>Zhanaozen city</span>
-                <br><br>
-                <b></b>
-                <span></span>
-                <br><br><br>
-                <div class="dropdown-divider"></div>
-                <br><br>
-            </div>
-            <div class="col-lg-4 col-sm-6 ">
-                <br>
-                <h5>Lessons <i class="far fa-chalkboard-teacher"></i></h5><br>
-                <a class="flink" href="lessons_cdb.php?punct=html0101"><span>Computer and DB</span></a>
-                <br>
-                <a class="flink" href="lessons_html.php?punct=html0101"><span>HTML</span></a>
-                <br>
-                <a class="flink" href="lessons_css.php?punct=css0101"><span>CSS</span></a>
-                <br>
-                <a class="flink" href="lessons_cpp.php?punct=cpp0101"><span>C++</span></a>
-                <br><br>
-                <div class="dropdown-divider"></div>
-                <br><br>
             </div>
         </div>
+        <!---------------------------------------footer------------------->
+        <br><br>
     </div>
-</div>
+    {#    <div class="container-fluid purple-gradient footer">#}
+    {#        <div class="container">#}
+    {#            <div class="row" style="color: #fff;">#}
+    {#                <div class="col-lg-4 col-sm-6 ">#}
+    {#                    <br>#}
+    {#                    <h5>Contacts <i class="far fa-phone-office"></i></i></i></h5><br>#}
+    {#                    <b>Phone number:</b>#}
+    {#                    <span>+7(7142) 22-23-24</span>#}
+    {#                    <br><br>#}
+    {#                    <b>Mobilephone:</b>#}
+    {#                    <span>+7(775) 838-35-43</span>#}
+    {#                    <br><br><br>#}
+    {#                    <div class="dropdown-divider"></div>#}
+    {#                    <br><br>#}
+    {#                </div>#}
+    {##}
+    {#                <div class="col-lg-4 col-sm-6 ">#}
+    {#                    <br>#}
+    {#                    <h5>Adress <i class="far fa-city"></i></h5><br>#}
+    {#                    <b>Adress:</b>#}
+    {#                    <span>Zhanaozen city</span>#}
+    {#                    <br><br>#}
+    {#                    <b></b>#}
+    {#                    <span></span>#}
+    {#                    <br><br><br>#}
+    {#                    <div class="dropdown-divider"></div>#}
+    {#                    <br><br>#}
+    {#                </div>#}
+    {#                <div class="col-lg-4 col-sm-6 ">#}
+    {#                    <br>#}
+    {#                    <h5>Lessons <i class="far fa-chalkboard-teacher"></i></h5><br>#}
+    {#                    <a class="flink" href="lessons_cdb.php?punct=html0101"><span>Computer and DB</span></a>#}
+    {#                    <br>#}
+    {#                    <a class="flink" href="lessons_html.php?punct=html0101"><span>HTML</span></a>#}
+    {#                    <br>#}
+    {#                    <a class="flink" href="lessons_css.php?punct=css0101"><span>CSS</span></a>#}
+    {#                    <br>#}
+    {#                    <a class="flink" href="lessons_cpp.php?punct=cpp0101"><span>C++</span></a>#}
+    {#                    <br><br>#}
+    {#                    <div class="dropdown-divider"></div>#}
+    {#                    <br><br>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
 
-
-<script src="../js/jquery-3.2.1.slim.min.js"></script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/jquery-3.3.1.js"></script>
-<script src="../DataTables/datatables.min.js"></script>
-<script src="../js/script.js"></script>
-<script src="../js/app.js"></script>
-<script src="../FontAwesome/js/all.js"></script>
-</body>
-</html>
+{% endblock %}

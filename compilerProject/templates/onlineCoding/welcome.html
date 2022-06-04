@@ -1,594 +1,1618 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
 <head>
-    {% load static %}
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Online Coding</title>
-    <link href="https://fonts.googleapis.com/css?family=Heebo:400,400i,500,700|Titillium+Web:600" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'onlineCoding/dist/css/style.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'onlineCoding/favicon.ico' %}">
-{#    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>#}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@forevolve/bootstrap-dark@2.0.0/dist/css/bootstrap-dark-prefers-light.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Agency - Start Bootstrap Theme</title>
+    <!-- Favicon-->
+    <style type="text/css">:host, :root {
+        --fa-font-solid: normal 900 1em/1 "Font Awesome 6 Solid";
+        --fa-font-regular: normal 400 1em/1 "Font Awesome 6 Regular";
+        --fa-font-light: normal 300 1em/1 "Font Awesome 6 Light";
+        --fa-font-thin: normal 100 1em/1 "Font Awesome 6 Thin";
+        --fa-font-duotone: normal 900 1em/1 "Font Awesome 6 Duotone";
+        --fa-font-brands: normal 400 1em/1 "Font Awesome 6 Brands"
+    }
 
-    <link rel="stylesheet" href="{% static 'onlineCoding/css/style.css' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'onlineCoding/favicon.ico' %}">
+    svg:not(:host).svg-inline--fa, svg:not(:root).svg-inline--fa {
+        overflow: visible;
+        box-sizing: content-box
+    }
+
+    .svg-inline--fa {
+        display: var(--fa-display, inline-block);
+        height: 1em;
+        overflow: visible;
+        vertical-align: -.125em
+    }
+
+    .svg-inline--fa.fa-2xs {
+        vertical-align: .1em
+    }
+
+    .svg-inline--fa.fa-xs {
+        vertical-align: 0
+    }
+
+    .svg-inline--fa.fa-sm {
+        vertical-align: -.0714285705em
+    }
+
+    .svg-inline--fa.fa-lg {
+        vertical-align: -.2em
+    }
+
+    .svg-inline--fa.fa-xl {
+        vertical-align: -.25em
+    }
+
+    .svg-inline--fa.fa-2xl {
+        vertical-align: -.3125em
+    }
+
+    .svg-inline--fa.fa-pull-left {
+        margin-right: var(--fa-pull-margin, .3em);
+        width: auto
+    }
+
+    .svg-inline--fa.fa-pull-right {
+        margin-left: var(--fa-pull-margin, .3em);
+        width: auto
+    }
+
+    .svg-inline--fa.fa-li {
+        width: var(--fa-li-width, 2em);
+        top: .25em
+    }
+
+    .svg-inline--fa.fa-fw {
+        width: var(--fa-fw-width, 1.25em)
+    }
+
+    .fa-layers svg.svg-inline--fa {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0
+    }
+
+    .fa-layers-counter, .fa-layers-text {
+        display: inline-block;
+        position: absolute;
+        text-align: center
+    }
+
+    .fa-layers {
+        display: inline-block;
+        height: 1em;
+        position: relative;
+        text-align: center;
+        vertical-align: -.125em;
+        width: 1em
+    }
+
+    .fa-layers svg.svg-inline--fa {
+        -webkit-transform-origin: center center;
+        transform-origin: center center
+    }
+
+    .fa-layers-text {
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        -webkit-transform-origin: center center;
+        transform-origin: center center
+    }
+
+    .fa-layers-counter {
+        background-color: var(--fa-counter-background-color, #ff253a);
+        border-radius: var(--fa-counter-border-radius, 1em);
+        box-sizing: border-box;
+        color: var(--fa-inverse, #fff);
+        line-height: var(--fa-counter-line-height, 1);
+        max-width: var(--fa-counter-max-width, 5em);
+        min-width: var(--fa-counter-min-width, 1.5em);
+        overflow: hidden;
+        padding: var(--fa-counter-padding, .25em .5em);
+        right: var(--fa-right, 0);
+        text-overflow: ellipsis;
+        top: var(--fa-top, 0);
+        -webkit-transform: scale(var(--fa-counter-scale, .25));
+        transform: scale(var(--fa-counter-scale, .25));
+        -webkit-transform-origin: top right;
+        transform-origin: top right
+    }
+
+    .fa-layers-bottom-right {
+        bottom: var(--fa-bottom, 0);
+        right: var(--fa-right, 0);
+        top: auto;
+        -webkit-transform: scale(var(--fa-layers-scale, .25));
+        transform: scale(var(--fa-layers-scale, .25));
+        -webkit-transform-origin: bottom right;
+        transform-origin: bottom right
+    }
+
+    .fa-layers-bottom-left {
+        bottom: var(--fa-bottom, 0);
+        left: var(--fa-left, 0);
+        right: auto;
+        top: auto;
+        -webkit-transform: scale(var(--fa-layers-scale, .25));
+        transform: scale(var(--fa-layers-scale, .25));
+        -webkit-transform-origin: bottom left;
+        transform-origin: bottom left
+    }
+
+    .fa-layers-top-right {
+        top: var(--fa-top, 0);
+        right: var(--fa-right, 0);
+        -webkit-transform: scale(var(--fa-layers-scale, .25));
+        transform: scale(var(--fa-layers-scale, .25));
+        -webkit-transform-origin: top right;
+        transform-origin: top right
+    }
+
+    .fa-layers-top-left {
+        left: var(--fa-left, 0);
+        right: auto;
+        top: var(--fa-top, 0);
+        -webkit-transform: scale(var(--fa-layers-scale, .25));
+        transform: scale(var(--fa-layers-scale, .25));
+        -webkit-transform-origin: top left;
+        transform-origin: top left
+    }
+
+    .fa-1x {
+        font-size: 1em
+    }
+
+    .fa-2x {
+        font-size: 2em
+    }
+
+    .fa-3x {
+        font-size: 3em
+    }
+
+    .fa-4x {
+        font-size: 4em
+    }
+
+    .fa-5x {
+        font-size: 5em
+    }
+
+    .fa-6x {
+        font-size: 6em
+    }
+
+    .fa-7x {
+        font-size: 7em
+    }
+
+    .fa-8x {
+        font-size: 8em
+    }
+
+    .fa-9x {
+        font-size: 9em
+    }
+
+    .fa-10x {
+        font-size: 10em
+    }
+
+    .fa-2xs {
+        font-size: .625em;
+        line-height: .1em;
+        vertical-align: .225em
+    }
+
+    .fa-xs {
+        font-size: .75em;
+        line-height: .0833333337em;
+        vertical-align: .125em
+    }
+
+    .fa-sm {
+        font-size: .875em;
+        line-height: .0714285718em;
+        vertical-align: .0535714295em
+    }
+
+    .fa-lg {
+        font-size: 1.25em;
+        line-height: .05em;
+        vertical-align: -.075em
+    }
+
+    .fa-xl {
+        font-size: 1.5em;
+        line-height: .0416666682em;
+        vertical-align: -.125em
+    }
+
+    .fa-2xl {
+        font-size: 2em;
+        line-height: .03125em;
+        vertical-align: -.1875em
+    }
+
+    .fa-fw {
+        text-align: center;
+        width: 1.25em
+    }
+
+    .fa-ul {
+        list-style-type: none;
+        margin-left: var(--fa-li-margin, 2.5em);
+        padding-left: 0
+    }
+
+    .fa-ul > li {
+        position: relative
+    }
+
+    .fa-li {
+        left: calc(var(--fa-li-width, 2em) * -1);
+        position: absolute;
+        text-align: center;
+        width: var(--fa-li-width, 2em);
+        line-height: inherit
+    }
+
+    .fa-border {
+        border-color: var(--fa-border-color, #eee);
+        border-radius: var(--fa-border-radius, .1em);
+        border-style: var(--fa-border-style, solid);
+        border-width: var(--fa-border-width, .08em);
+        padding: var(--fa-border-padding, .2em .25em .15em)
+    }
+
+    .fa-pull-left {
+        float: left;
+        margin-right: var(--fa-pull-margin, .3em)
+    }
+
+    .fa-pull-right {
+        float: right;
+        margin-left: var(--fa-pull-margin, .3em)
+    }
+
+    .fa-beat {
+        -webkit-animation-name: fa-beat;
+        animation-name: fa-beat;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, ease-in-out);
+        animation-timing-function: var(--fa-animation-timing, ease-in-out)
+    }
+
+    .fa-bounce {
+        -webkit-animation-name: fa-bounce;
+        animation-name: fa-bounce;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, cubic-bezier(.28, .84, .42, 1));
+        animation-timing-function: var(--fa-animation-timing, cubic-bezier(.28, .84, .42, 1))
+    }
+
+    .fa-fade {
+        -webkit-animation-name: fa-fade;
+        animation-name: fa-fade;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, cubic-bezier(.4, 0, .6, 1));
+        animation-timing-function: var(--fa-animation-timing, cubic-bezier(.4, 0, .6, 1))
+    }
+
+    .fa-beat-fade {
+        -webkit-animation-name: fa-beat-fade;
+        animation-name: fa-beat-fade;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, cubic-bezier(.4, 0, .6, 1));
+        animation-timing-function: var(--fa-animation-timing, cubic-bezier(.4, 0, .6, 1))
+    }
+
+    .fa-flip {
+        -webkit-animation-name: fa-flip;
+        animation-name: fa-flip;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, ease-in-out);
+        animation-timing-function: var(--fa-animation-timing, ease-in-out)
+    }
+
+    .fa-shake {
+        -webkit-animation-name: fa-shake;
+        animation-name: fa-shake;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, linear);
+        animation-timing-function: var(--fa-animation-timing, linear)
+    }
+
+    .fa-spin {
+        -webkit-animation-name: fa-spin;
+        animation-name: fa-spin;
+        -webkit-animation-delay: var(--fa-animation-delay, 0);
+        animation-delay: var(--fa-animation-delay, 0);
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 2s);
+        animation-duration: var(--fa-animation-duration, 2s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, linear);
+        animation-timing-function: var(--fa-animation-timing, linear)
+    }
+
+    .fa-spin-reverse {
+        --fa-animation-direction: reverse
+    }
+
+    .fa-pulse, .fa-spin-pulse {
+        -webkit-animation-name: fa-spin;
+        animation-name: fa-spin;
+        -webkit-animation-direction: var(--fa-animation-direction, normal);
+        animation-direction: var(--fa-animation-direction, normal);
+        -webkit-animation-duration: var(--fa-animation-duration, 1s);
+        animation-duration: var(--fa-animation-duration, 1s);
+        -webkit-animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        animation-iteration-count: var(--fa-animation-iteration-count, infinite);
+        -webkit-animation-timing-function: var(--fa-animation-timing, steps(8));
+        animation-timing-function: var(--fa-animation-timing, steps(8))
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .fa-beat, .fa-beat-fade, .fa-bounce, .fa-fade, .fa-flip, .fa-pulse, .fa-shake, .fa-spin, .fa-spin-pulse {
+            -webkit-animation-delay: -1ms;
+            animation-delay: -1ms;
+            -webkit-animation-duration: 1ms;
+            animation-duration: 1ms;
+            -webkit-animation-iteration-count: 1;
+            animation-iteration-count: 1;
+            transition-delay: 0s;
+            transition-duration: 0s
+        }
+    }
+
+    @-webkit-keyframes fa-beat {
+        0%, 90% {
+            -webkit-transform: scale(1);
+            transform: scale(1)
+        }
+        45% {
+            -webkit-transform: scale(var(--fa-beat-scale, 1.25));
+            transform: scale(var(--fa-beat-scale, 1.25))
+        }
+    }
+
+    @keyframes fa-beat {
+        0%, 90% {
+            -webkit-transform: scale(1);
+            transform: scale(1)
+        }
+        45% {
+            -webkit-transform: scale(var(--fa-beat-scale, 1.25));
+            transform: scale(var(--fa-beat-scale, 1.25))
+        }
+    }
+
+    @-webkit-keyframes fa-bounce {
+        0% {
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0)
+        }
+        10% {
+            -webkit-transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, .9)) translateY(0);
+            transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, .9)) translateY(0)
+        }
+        30% {
+            -webkit-transform: scale(var(--fa-bounce-jump-scale-x, .9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -.5em));
+            transform: scale(var(--fa-bounce-jump-scale-x, .9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -.5em))
+        }
+        50% {
+            -webkit-transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, .95)) translateY(0);
+            transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, .95)) translateY(0)
+        }
+        57% {
+            -webkit-transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -.125em));
+            transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -.125em))
+        }
+        64% {
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0)
+        }
+        100% {
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0)
+        }
+    }
+
+    @keyframes fa-bounce {
+        0% {
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0)
+        }
+        10% {
+            -webkit-transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, .9)) translateY(0);
+            transform: scale(var(--fa-bounce-start-scale-x, 1.1), var(--fa-bounce-start-scale-y, .9)) translateY(0)
+        }
+        30% {
+            -webkit-transform: scale(var(--fa-bounce-jump-scale-x, .9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -.5em));
+            transform: scale(var(--fa-bounce-jump-scale-x, .9), var(--fa-bounce-jump-scale-y, 1.1)) translateY(var(--fa-bounce-height, -.5em))
+        }
+        50% {
+            -webkit-transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, .95)) translateY(0);
+            transform: scale(var(--fa-bounce-land-scale-x, 1.05), var(--fa-bounce-land-scale-y, .95)) translateY(0)
+        }
+        57% {
+            -webkit-transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -.125em));
+            transform: scale(1, 1) translateY(var(--fa-bounce-rebound, -.125em))
+        }
+        64% {
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0)
+        }
+        100% {
+            -webkit-transform: scale(1, 1) translateY(0);
+            transform: scale(1, 1) translateY(0)
+        }
+    }
+
+    @-webkit-keyframes fa-fade {
+        50% {
+            opacity: var(--fa-fade-opacity, .4)
+        }
+    }
+
+    @keyframes fa-fade {
+        50% {
+            opacity: var(--fa-fade-opacity, .4)
+        }
+    }
+
+    @-webkit-keyframes fa-beat-fade {
+        0%, 100% {
+            opacity: var(--fa-beat-fade-opacity, .4);
+            -webkit-transform: scale(1);
+            transform: scale(1)
+        }
+        50% {
+            opacity: 1;
+            -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
+            transform: scale(var(--fa-beat-fade-scale, 1.125))
+        }
+    }
+
+    @keyframes fa-beat-fade {
+        0%, 100% {
+            opacity: var(--fa-beat-fade-opacity, .4);
+            -webkit-transform: scale(1);
+            transform: scale(1)
+        }
+        50% {
+            opacity: 1;
+            -webkit-transform: scale(var(--fa-beat-fade-scale, 1.125));
+            transform: scale(var(--fa-beat-fade-scale, 1.125))
+        }
+    }
+
+    @-webkit-keyframes fa-flip {
+        50% {
+            -webkit-transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+            transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg))
+        }
+    }
+
+    @keyframes fa-flip {
+        50% {
+            -webkit-transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg));
+            transform: rotate3d(var(--fa-flip-x, 0), var(--fa-flip-y, 1), var(--fa-flip-z, 0), var(--fa-flip-angle, -180deg))
+        }
+    }
+
+    @-webkit-keyframes fa-shake {
+        0% {
+            -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg)
+        }
+        4% {
+            -webkit-transform: rotate(15deg);
+            transform: rotate(15deg)
+        }
+        24%, 8% {
+            -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg)
+        }
+        12%, 28% {
+            -webkit-transform: rotate(18deg);
+            transform: rotate(18deg)
+        }
+        16% {
+            -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg)
+        }
+        20% {
+            -webkit-transform: rotate(22deg);
+            transform: rotate(22deg)
+        }
+        32% {
+            -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg)
+        }
+        36% {
+            -webkit-transform: rotate(12deg);
+            transform: rotate(12deg)
+        }
+        100%, 40% {
+            -webkit-transform: rotate(0);
+            transform: rotate(0)
+        }
+    }
+
+    @keyframes fa-shake {
+        0% {
+            -webkit-transform: rotate(-15deg);
+            transform: rotate(-15deg)
+        }
+        4% {
+            -webkit-transform: rotate(15deg);
+            transform: rotate(15deg)
+        }
+        24%, 8% {
+            -webkit-transform: rotate(-18deg);
+            transform: rotate(-18deg)
+        }
+        12%, 28% {
+            -webkit-transform: rotate(18deg);
+            transform: rotate(18deg)
+        }
+        16% {
+            -webkit-transform: rotate(-22deg);
+            transform: rotate(-22deg)
+        }
+        20% {
+            -webkit-transform: rotate(22deg);
+            transform: rotate(22deg)
+        }
+        32% {
+            -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg)
+        }
+        36% {
+            -webkit-transform: rotate(12deg);
+            transform: rotate(12deg)
+        }
+        100%, 40% {
+            -webkit-transform: rotate(0);
+            transform: rotate(0)
+        }
+    }
+
+    @-webkit-keyframes fa-spin {
+        0% {
+            -webkit-transform: rotate(0);
+            transform: rotate(0)
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg)
+        }
+    }
+
+    @keyframes fa-spin {
+        0% {
+            -webkit-transform: rotate(0);
+            transform: rotate(0)
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg)
+        }
+    }
+
+    .fa-rotate-90 {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg)
+    }
+
+    .fa-rotate-180 {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg)
+    }
+
+    .fa-rotate-270 {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg)
+    }
+
+    .fa-flip-horizontal {
+        -webkit-transform: scale(-1, 1);
+        transform: scale(-1, 1)
+    }
+
+    .fa-flip-vertical {
+        -webkit-transform: scale(1, -1);
+        transform: scale(1, -1)
+    }
+
+    .fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
+        -webkit-transform: scale(-1, -1);
+        transform: scale(-1, -1)
+    }
+
+    .fa-rotate-by {
+        -webkit-transform: rotate(var(--fa-rotate-angle, none));
+        transform: rotate(var(--fa-rotate-angle, none))
+    }
+
+    .fa-stack {
+        display: inline-block;
+        vertical-align: middle;
+        height: 2em;
+        position: relative;
+        width: 2.5em
+    }
+
+    .fa-stack-1x, .fa-stack-2x {
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: var(--fa-stack-z-index, auto)
+    }
+
+    .svg-inline--fa.fa-stack-1x {
+        height: 1em;
+        width: 1.25em
+    }
+
+    .svg-inline--fa.fa-stack-2x {
+        height: 2em;
+        width: 2.5em
+    }
+
+    .fa-inverse {
+        color: var(--fa-inverse, #fff)
+    }
+
+    .fa-sr-only, .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0
+    }
+
+    .fa-sr-only-focusable:not(:focus), .sr-only-focusable:not(:focus) {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0
+    }
+
+    .svg-inline--fa .fa-primary {
+        fill: var(--fa-primary-color, currentColor);
+        opacity: var(--fa-primary-opacity, 1)
+    }
+
+    .svg-inline--fa .fa-secondary {
+        fill: var(--fa-secondary-color, currentColor);
+        opacity: var(--fa-secondary-opacity, .4)
+    }
+
+    .svg-inline--fa.fa-swap-opacity .fa-primary {
+        opacity: var(--fa-secondary-opacity, .4)
+    }
+
+    .svg-inline--fa.fa-swap-opacity .fa-secondary {
+        opacity: var(--fa-primary-opacity, 1)
+    }
+
+    .svg-inline--fa mask .fa-primary, .svg-inline--fa mask .fa-secondary {
+        fill: #000
+    }
+
+    .fa-duotone.fa-inverse, .fad.fa-inverse {
+        color: var(--fa-inverse, #fff)
+    }</style>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>.d-none {
+        display: none;
+    }
+
+    .invalid-feedback {
+        display: none;
+    }
+
+    .btn.disabled {
+        pointer-events: none;
+        opacity: 0.65;
+    }</style>
 </head>
-<body class="is-boxed">
-<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-purple-gradient">
-    <a class="navbar-brand" href="#">Online coding</a>
-    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    {% with request.resolver_match.url_name as url_name %}
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item {% if url_name == 'leaderboard' %} active {% endif %}">
-                    <a class="nav-link" href="/leaderboard">LeaderBoard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item {% if url_name == 'problems' %} active {% endif %}">
-                    <a class="nav-link" href="/problems">Problems</a>
-                </li>
-                <li class="nav-item {% if url_name == 'courses' %} active {% endif %}">
-                    <a class="nav-link" href="/courses">Courses</a>
-                </li>
-
-
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..."></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <svg class="svg-inline--fa fa-bars ms-1" aria-hidden="true" focusable="false" data-prefix="fas"
+                 data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
+                <path fill="currentColor"
+                      d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"></path>
+            </svg><!-- <i class="fas fa-bars ms-1"></i> Font Awesome fontawesome.com -->
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
             </ul>
-            {#        <form class="form-inline my-2 my-lg-0">#}
-            {#            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">#}
-            {#            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>#}
-            {#        </form>#}
-            <ul class="navbar-nav">
-                {% if request.user.is_authenticated %}
-                    <li class="nav-item dropdown {% if url_name == 'profile' %} active {% endif %}">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">{{ request.user }}</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="/profile">Profile</a>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/auth">Login/Register</a>
-                    </li>
-                {% endif %}
-            </ul>
-
-
         </div>
-    {% endwith %}
+    </div>
 </nav>
-<div class="body-wrap boxed-container">
-    <header class="site-header">
-        <div class="container">
-            <div class="site-header-inner">
-                <div class="brand header-brand">
-                    <h1 class="m-0">
-                        <a href="#">
-                            <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                <title>Ellie</title>
-                                <defs>
-                                    <linearGradient x1="0%" y1="0%" y2="100%" id="logo-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="0%" y1="0%" y2="100%" id="logo-b">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="0%" y1="0%" y2="100%" id="logo-c">
-                                        <stop stop-color="#78F9FF" stop-opacity=".24" offset="0%"/>
-                                        <stop stop-color="#43F1FF" offset="55.496%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <path d="M4 0h12v16H0V4a4 4 0 0 1 4-4z" fill="url(#logo-a)"/>
-                                    <path d="M16 16h16v12a4 4 0 0 1-4 4H16V16z" fill="url(#logo-b)"/>
-                                    <path d="M11.5 20.5H.5v1h10v10h1v-11z" stroke="url(#logo-c)"
-                                          transform="matrix(-1 0 0 1 12 0)"/>
-                                    <path d="M31.5.5h-11v1h10v10h1V.5z" stroke="url(#logo-c)"
-                                          transform="matrix(1 0 0 -1 0 12)"/>
-                                </g>
-                            </svg>
-                        </a>
-                    </h1>
-                </div>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">Welcome To Our Studio!</div>
+        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
+    </div>
+</header>
+<!-- Services-->
+<section class="page-section" id="services">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Services</h2>
+            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <svg class="svg-inline--fa fa-circle fa-stack-2x text-primary" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="circle" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path
+                                    fill="currentColor"
+                                    d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256z"></path></svg>
+                            <!-- <i class="fas fa-circle fa-stack-2x text-primary"></i> Font Awesome fontawesome.com -->
+                            <svg class="svg-inline--fa fa-cart-shopping fa-stack-1x fa-inverse" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="cart-shopping" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path
+                                    fill="currentColor"
+                                    d="M96 0C107.5 0 117.4 8.19 119.6 19.51L121.1 32H541.8C562.1 32 578.3 52.25 572.6 72.66L518.6 264.7C514.7 278.5 502.1 288 487.8 288H170.7L179.9 336H488C501.3 336 512 346.7 512 360C512 373.3 501.3 384 488 384H159.1C148.5 384 138.6 375.8 136.4 364.5L76.14 48H24C10.75 48 0 37.25 0 24C0 10.75 10.75 0 24 0H96zM128 464C128 437.5 149.5 416 176 416C202.5 416 224 437.5 224 464C224 490.5 202.5 512 176 512C149.5 512 128 490.5 128 464zM512 464C512 490.5 490.5 512 464 512C437.5 512 416 490.5 416 464C416 437.5 437.5 416 464 416C490.5 416 512 437.5 512 464z"></path></svg>
+                            <!-- <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i> Font Awesome fontawesome.com -->
+                        </span>
+                <h4 class="my-3">E-Commerce</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam
+                    architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+            <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <svg class="svg-inline--fa fa-circle fa-stack-2x text-primary" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="circle" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path
+                                    fill="currentColor"
+                                    d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256z"></path></svg>
+                            <!-- <i class="fas fa-circle fa-stack-2x text-primary"></i> Font Awesome fontawesome.com -->
+                            <svg class="svg-inline--fa fa-laptop fa-stack-1x fa-inverse" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="laptop" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path
+                                    fill="currentColor"
+                                    d="M128 96h384v256h64v-272c0-26.38-21.62-48-48-48h-416c-26.38 0-48 21.62-48 48V352h64V96zM624 383.1h-608c-8.75 0-16 7.25-16 16v16c0 35.25 28.75 64 64 64h512c35.25 0 64-28.75 64-64v-16C640 391.2 632.8 383.1 624 383.1z"></path></svg>
+                            <!-- <i class="fas fa-laptop fa-stack-1x fa-inverse"></i> Font Awesome fontawesome.com -->
+                        </span>
+                <h4 class="my-3">Responsive Design</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam
+                    architecto quo inventore harum ex magni, dicta impedit.</p>
+            </div>
+            <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <svg class="svg-inline--fa fa-circle fa-stack-2x text-primary" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="circle" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path
+                                    fill="currentColor"
+                                    d="M512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256z"></path></svg>
+                            <!-- <i class="fas fa-circle fa-stack-2x text-primary"></i> Font Awesome fontawesome.com -->
+                            <svg class="svg-inline--fa fa-lock fa-stack-1x fa-inverse" aria-hidden="true"
+                                 focusable="false" data-prefix="fas" data-icon="lock" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><path
+                                    fill="currentColor"
+                                    d="M80 192V144C80 64.47 144.5 0 224 0C303.5 0 368 64.47 368 144V192H384C419.3 192 448 220.7 448 256V448C448 483.3 419.3 512 384 512H64C28.65 512 0 483.3 0 448V256C0 220.7 28.65 192 64 192H80zM144 192H304V144C304 99.82 268.2 64 224 64C179.8 64 144 99.82 144 144V192z"></path></svg>
+                            <!-- <i class="fas fa-lock fa-stack-1x fa-inverse"></i> Font Awesome fontawesome.com -->
+                        </span>
+                <h4 class="my-3">Web Security</h4>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam
+                    architecto quo inventore harum ex magni, dicta impedit.</p>
             </div>
         </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-inner">
-                    <div class="hero-copy">
-                        <h1 class="hero-title mt-0 is-revealing">Compete and try your skills</h1>
-                        <p class="hero-paragraph is-revealing">Our project developing in way to compete in sphere of
-                            competitive programming.</p>
-                        <div class="hero-form field field-grouped is-revealing">
-                            <div class="control">
-                                <a class="button button-primary button-block" href="auth">Authorize</a>
-                            </div>
+    </div>
+</section>
+<!-- Portfolio Grid-->
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Portfolio</h2>
+            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 1-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
                         </div>
-                    </div>
-                    <div class="hero-illustration">
-                        <div class="hero-bg">
-                            <svg width="720" height="635" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="97.738%" id="a">
-                                        <stop stop-color="#151616" offset="0%"/>
-                                        <stop stop-color="#222424" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <path d="M0 0h720v504.382L279.437 630.304c-53.102 15.177-108.454-15.567-123.631-68.669-.072-.25-.142-.5-.211-.75L0 0z"
-                                      fill="url(#a)" fill-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-1 is-moving-object is-rotating">
-                            <svg width="220" height="220" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-1-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="18.74%" y1="17.384%" x2="96.787%" y2="88.669%" id="square-1-b">
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#43F1FF" offset="53.489%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <path fill="url(#square-1-a)" opacity=".64" d="M0 0h220v220H0z"/>
-                                    <path d="M0 65.022V61.7c51.102-26.116 77.322-13.388 77.322 38.41 0 57.718 25.944 67.701 79.782 30.373l1.709 2.466c-55.678 38.604-84.491 27.517-84.491-32.839 0-49.494-24.315-61.27-74.322-35.087z"
-                                          fill="url(#square-1-b)" fill-rule="nonzero" opacity=".701"/>
-                                    <path d="M113.203 220c2.943-57.607 37.666-164 90.473-164 4.973 0 10.458.203 16.324.614v77.24c-5.819.237-11.3 1.007-16.324 2.458-32.685 9.44-57.608 55.87-72.976 83.688h-17.497z"
-                                          fill-opacity=".096" fill="#43F1FF"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-2 is-moving-object is-rotating">
-                            <svg width="88" height="88" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-2-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="-31.43%" y1="104.265%" x2="143.71%" y2="43.581%"
-                                                    id="square-2-b">
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".16" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <path fill="url(#square-2-a)" d="M0 0h88v88H0z"/>
-                                    <path d="M19.717 36.579C13.824 33.969 7.004 32.555 0 31.535V0h88v88H76.869C59.773 67.766 40.697 45.872 19.717 36.579z"
-                                          fill="url(#square-2-b)"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-3 is-moving-object is-rotating">
-                            <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-3-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".16" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="-58.825%" y1="39.622%" x2="81.589%" y2="-11.971%"
-                                                    id="square-3-b">
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".163" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd" opacity=".64">
-                                    <path fill="url(#square-3-a)" d="M0 0h64v64H0z"/>
-                                    <path d="M14.03 0C27.176 13.07 42 27.791 42 38.165c0 17.46-14.154-11.127-31.614-11.127-2.67 0-6.289.931-10.386 2.406V0h14.03z"
-                                          fill="url(#square-3-b)"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-4 is-moving-object is-rotating">
-                            <svg width="320" height="320" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-4-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="18.74%" y1="17.384%" x2="96.787%" y2="88.669%" id="square-4-b">
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#43F1FF" offset="53.489%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="0%" y1="57.64%" x2="94.346%" y2="8.32%" id="square-4-c">
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".16" offset="100%"/>
-                                    </linearGradient>
-                                    <radialGradient cx="100%" cy="100%" fx="100%" fy="100%" r="136.8%" id="square-4-d">
-                                        <stop stop-color="#43F1FF" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </radialGradient>
-                                    <radialGradient cx="100%" cy="100%" fx="100%" fy="100%" r="140.264%"
-                                                    id="square-4-e">
-                                        <stop stop-color="#43F1FF" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </radialGradient>
-                                    <radialGradient cx="100%" cy="100%" fx="100%" fy="100%" r="137.638%"
-                                                    id="square-4-f">
-                                        <stop stop-color="#43F1FF" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </radialGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <rect fill="url(#square-4-a)" width="320" height="320" rx="2"/>
-                                    <path d="M278.958 209.715c-54.758 37.966-82.136 27.43-82.136-31.606s-34.335-65.905-103.005-20.607C49.492 185.246 33.604 160.412 46.154 83"
-                                          stroke="url(#square-4-b)" stroke-width="3"/>
-                                    <path d="M71.05 41.844c57.243-16.532 154.657 38.697 154.657-16.532 0-8.934-4.692-17.934-10.123-25.312H0v99.92c19.6-22.665 44.942-50.536 71.05-58.076z"
-                                          fill="url(#square-4-c)"/>
-                                    <path d="M320 320V66C179.72 66 66 179.72 66 320h254z" fill="url(#square-4-d)"
-                                          opacity=".16"/>
-                                    <path d="M320 320V131c-104.382 0-189 84.618-189 189h189z" fill="url(#square-4-e)"
-                                          opacity=".32"/>
-                                    <path d="M320 320V196c-68.483 0-124 55.517-124 124h124z" fill="url(#square-4-f)"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-5 is-moving-object is-rotating">
-                            <svg width="141" height="140" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-5-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="27.288%" y1="50%" x2="172.696%" y2="-8.701%" id="square-5-b">
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".16" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="18.74%" y1="17.384%" x2="96.787%" y2="88.669%" id="square-5-c">
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#43F1FF" offset="53.489%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <path opacity=".24" fill="url(#square-5-a)" d="M19 18h128v128H19z"
-                                          transform="translate(-6 -6)"/>
-                                    <path d="M147 76.088V18h-35.004c-4.63 24.206-16.838 55.057-44.819 79.224-63.217 54.6 46.59-21.136 79.823-21.136z"
-                                          opacity=".24" fill="url(#square-5-b)" transform="translate(-6 -6)"/>
-                                    <path d="M0 0l39.459 40.249" stroke="url(#square-5-c)" stroke-width="3"
-                                          transform="translate(-6 -6)"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-6 is-moving-object is-rotating">
-                            <svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-6-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="14.98%" y1="57.941%" x2="95.966%" y2="33.366%" id="square-6-b">
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".16" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="97.033%" y1="97.033%" x2="0%" y2="0%" id="square-6-c">
-                                        <stop stop-color="#43F1FF" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".24" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="18.74%" y1="17.384%" x2="96.787%" y2="88.669%" id="square-6-d">
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#43F1FF" offset="53.489%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <path fill="url(#square-6-a)" d="M0 0h128v128H0z"/>
-                                    <path d="M27.652 128H0V32.762c13.602-4.224 26.559-6.606 36.988-6.606 42.25 0-38.976 13.508-19.488 50.235C25.002 90.529 28.544 109.73 27.652 128z"
-                                          fill="url(#square-6-b)"/>
-                                    <path fill="url(#square-6-c)" opacity=".32" d="M88 88h40v40H88z"/>
-                                    <path d="M69 68l39.459 40.249" stroke="url(#square-6-d)" stroke-width="3"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-7 is-moving-object is-rotating">
-                            <svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-7-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <radialGradient cx="-5.754%" cy="67.691%" fx="-5.754%" fy="67.691%" r="140.869%"
-                                                    gradientTransform="scale(-1 -.64163) rotate(55.582 1.643 -.08)"
-                                                    id="square-7-b">
-                                        <stop stop-color="#43F1FF" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </radialGradient>
-                                    <linearGradient x1="0%" y1="23.176%" x2="96.787%" y2="88.669%" id="square-7-c">
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#43F1FF" offset="32.912%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity="0" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd" opacity=".601">
-                                    <path fill="url(#square-7-a)" d="M0 0h64v64H0z"/>
-                                    <path d="M0 64V.1C22.901 1.644 41 20.709 41 44c0 7.202-1.73 14-4.798 20H0z"
-                                          fill="url(#square-7-b)"/>
-                                    <path d="M63.925 58.495c-4.136-2.459-9.143-4.747-15.272-6.916-23.745-8.402-32.768-20.182-27.972-32.9 2.7-7.16 9.914-13.947 18.763-18.679h7.221c-10.84 4.263-20.209 11.866-23.177 19.737-4.076 10.81 3.808 21.103 26.166 29.014 5.524 1.955 10.252 4.048 14.271 6.3v3.444z"
-                                          fill="url(#square-7-c)" fill-rule="nonzero"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-square hero-square-8 is-moving-object is-rotating">
-                            <svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="square-8-a">
-                                        <stop stop-color="#4353FF" offset="0%"/>
-                                        <stop stop-color="#4353FF" stop-opacity=".32" offset="100%"/>
-                                    </linearGradient>
-                                    <linearGradient x1="66.071%" y1="50%" x2="168.952%" y2="11.585%" id="square-8-b">
-                                        <stop stop-color="#43F1FF" stop-opacity=".123" offset="0%"/>
-                                        <stop stop-color="#43F1FF" stop-opacity=".16" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <g fill="none" fill-rule="evenodd">
-                                    <path fill="url(#square-8-a)" opacity=".24" d="M0 0h40v40H0z"/>
-                                    <path d="M40 0h-4.67c-.999 7.225-3.804 17.536-12.85 25.35-15.393 13.294 5.041-.287 17.36-4.644L40 0z"
-                                          fill="url(#square-8-b)"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-dots hero-dots-1 is-moving-object is-translating"
-                             data-translating-factor="160">
-                            <svg width="279" height="97" xmlns="http://www.w3.org/2000/svg">
-                                <g fill="#43F1FF" fill-rule="evenodd">
-                                    <path d="M71.686 0l-2.899 1.334L68 4.157l.926 2.688L71.686 8l2.6-1.31L76 4.156l-1.295-2.94z"/>
-                                    <path fill-opacity=".64"
-                                          d="M38.843 2l-1.45.667L37 4.079l.463 1.344 1.38.577 1.3-.655L41 4.079l-.648-1.47z"/>
-                                    <path fill-opacity=".24"
-                                          d="M65.843 55l-1.45.667L64 57.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".64"
-                                          d="M94.765 29l-2.175 1-.59 2.118.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                                    <path fill-opacity=".8"
-                                          d="M58.765 25l-2.175 1-.59 2.118.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                                    <path fill-opacity=".48"
-                                          d="M18.843 44l-1.45.667L17 46.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".64"
-                                          d="M8.843 29l-1.45.667L7 31.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".48"
-                                          d="M32.843 29l-1.45.667L31 31.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47zM.922 45l-.725.333L0 46.04l.232.672.69.289.65-.328L2 46.04l-.324-.735z"/>
-                                    <path fill-opacity=".24"
-                                          d="M267.843 93l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".8"
-                                          d="M275.765 75l-2.175 1-.59 2.118.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                                    <path fill-opacity=".48"
-                                          d="M259.843 78l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-dots hero-dots-2 is-moving-object is-translating"
-                             data-translating-factor="120">
-                            <svg width="138" height="132" xmlns="http://www.w3.org/2000/svg">
-                                <g fill="#43F1FF" fill-rule="evenodd">
-                                    <path d="M73.686 66l-2.899 1.334L70 70.157l.926 2.688L73.686 74l2.6-1.31L78 70.156l-1.295-2.94z"/>
-                                    <path fill-opacity=".64"
-                                          d="M108.843 0l-1.45.667L107 2.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".24"
-                                          d="M135.843 53l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".64"
-                                          d="M107.765 53l-2.175 1-.59 2.118.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                                    <path fill-opacity=".8"
-                                          d="M128.765 23l-2.175 1-.59 2.118.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                                    <path fill-opacity=".48"
-                                          d="M88.843 42l-1.45.667L87 44.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".64"
-                                          d="M78.843 27l-1.45.667L77 29.079l.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".48"
-                                          d="M102.843 27l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47zM70.922 43l-.725.333-.197.706.232.672.69.289.65-.328.428-.633-.324-.735z"/>
-                                    <path d="M2.765 126L.59 127 0 129.118l.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                                    <path fill-opacity=".64"
-                                          d="M24.843 127l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                                    <path fill-opacity=".48"
-                                          d="M6.922 114l-.725.333-.197.706.232.672.69.289.65-.328.428-.633-.324-.735z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-dots hero-dots-3 is-moving-object is-translating"
-                             data-translating-factor="160">
-                            <svg width="98" height="59" xmlns="http://www.w3.org/2000/svg">
-                                <g fill="#43F1FF" fill-rule="evenodd">
-                                    <path d="M26.314 0l2.899 1.334L30 4.157l-.926 2.688L26.314 8l-2.6-1.31L22 4.156l1.295-2.94z"/>
-                                    <path fill-opacity=".64"
-                                          d="M59.157 2l1.45.667L61 4.079l-.463 1.344-1.38.577-1.3-.655L57 4.079l.648-1.47z"/>
-                                    <path fill-opacity=".24"
-                                          d="M32.157 55l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L30 57.079l.648-1.47z"/>
-                                    <path fill-opacity=".64"
-                                          d="M3.235 29l2.175 1L6 32.118l-.695 2.016-2.07.866-1.95-.983L0 32.117l.972-2.204z"/>
-                                    <path fill-opacity=".8"
-                                          d="M39.235 25l2.175 1 .59 2.118-.695 2.016-2.07.866-1.95-.983-1.285-1.9.972-2.204z"/>
-                                    <path fill-opacity=".48"
-                                          d="M79.157 44l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L77 46.079l.648-1.47z"/>
-                                    <path fill-opacity=".64"
-                                          d="M89.157 29l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L87 31.079l.648-1.47z"/>
-                                    <path fill-opacity=".48"
-                                          d="M65.157 29l1.45.667.393 1.412-.463 1.344-1.38.577-1.3-.655L63 31.079l.648-1.47zM97.078 45l.725.333.197.706-.232.672-.69.289-.65-.328L96 46.04l.324-.735z"/>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="hero-line hero-line-1">
-                            <svg width="344" height="217" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient x1="18.74%" y1="17.384%" x2="96.787%" y2="88.669%" id="line-1-a">
-                                        <stop stop-color="#5D6AFF" stop-opacity="0" offset="0%"/>
-                                        <stop stop-color="#5D6AFF" offset="53.489%"/>
-                                        <stop stop-color="#5D6AFF" stop-opacity="0" offset="100%"/>
-                                    </linearGradient>
-                                </defs>
-                                <path d="M340.86 180.664l2.281 3.287c-79.796 55.378-120.994 39.511-120.994-47.035 0-82.777-47.283-92.246-144.735-27.901-32.607 20.428-55.391 21.53-67.544 2.516C-1.882 93.147-3.092 56.053 5.987 0l3.948.64c-8.928 55.125-7.743 91.453 3.303 108.736 10.644 16.653 31.058 15.666 62.01-3.725 99.65-65.797 150.9-55.534 150.9 31.265 0 83.03 37.371 97.424 114.713 43.748z"
-                                      fill="url(#line-1-a)" fill-rule="nonzero" transform="matrix(-1 0 0 1 343.141 0)"/>
-                            </svg>
-                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/1.jpg" alt="...">
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Threads</div>
+                        <div class="portfolio-caption-subheading text-muted">Illustration</div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section class="features section">
-            <div class="container">
-                <div class="features-inner section-inner">
-                    <div class="features-wrap">
-                        <div class="feature">
-                            <div class="feature-inner">
-                                <div class="feature-header mb-16">
-                                    <div class="feature-icon mr-16">
-                                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                                            <g fill-rule="nonzero" fill="none">
-                                                <path d="M7 8H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1zM19 8h-6a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"
-                                                      fill="#4353FF"/>
-                                                <path d="M19 20h-6a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"
-                                                      fill="#43F1FF"/>
-                                                <path d="M31 8h-6a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"
-                                                      fill="#4353FF"/>
-                                                <path d="M7 20H1a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"
-                                                      fill="#43F1FF"/>
-                                                <path d="M7 32H1a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1z"
-                                                      fill="#4353FF"/>
-                                                <path d="M29.5 18h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5z"
-                                                      fill="#43F1FF"/>
-                                                <path d="M17.5 30h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5zM29.5 30h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5z"
-                                                      fill="#4353FF"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <h4 class="feature-title m-0">Discover</h4>
-                                </div>
-                                <p class="text-sm mb-0">A pseudo-Latin text used in web design, layout, and printing in
-                                    place of things to emphasise design elements.</p>
-                            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 2-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
                         </div>
-                        <div class="feature">
-                            <div class="feature-inner">
-                                <div class="feature-header mb-16">
-                                    <div class="feature-icon mr-16">
-                                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                                            <g fill-rule="nonzero" fill="none">
-                                                <path d="M4 12H0V5a5.006 5.006 0 0 1 5-5h7v4H5a1 1 0 0 0-1 1v7z"
-                                                      fill="#43F1FF"/>
-                                                <path d="M32 12h-4V5a1 1 0 0 0-1-1h-7V0h7a5.006 5.006 0 0 1 5 5v7zM12 32H5a5.006 5.006 0 0 1-5-5v-7h4v7a1 1 0 0 0 1 1h7v4z"
-                                                      fill="#4353FF"/>
-                                                <path d="M27 32h-7v-4h7a1 1 0 0 0 1-1v-7h4v7a5.006 5.006 0 0 1-5 5z"
-                                                      fill="#43F1FF"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <h4 class="feature-title m-0">Discover</h4>
-                                </div>
-                                <p class="text-sm mb-0">A pseudo-Latin text used in web design, layout, and printing in
-                                    place of things to emphasise design elements.</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-inner">
-                                <div class="feature-header mb-16">
-                                    <div class="feature-icon mr-16">
-                                        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-                                            <g fill="none" fill-rule="nonzero">
-                                                <path d="M16 9c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z"
-                                                      fill="#4353FF"/>
-                                                <path d="M27 9c2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4 1.794 4 4 4z"
-                                                      fill="#43F1FF"/>
-                                                <path d="M27 12c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"
-                                                      fill="#4353FF"/>
-                                                <path d="M5 23c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"
-                                                      fill="#43F1FF"/>
-                                                <path d="M27 23c-1.859 0-3.41 1.28-3.858 3h-3.284A3.994 3.994 0 0 0 17 23.142v-3.284c1.72-.447 3-2 3-3.858 0-2.206-1.794-4-4-4-1.859 0-3.41 1.28-3.858 3H8.858A3.994 3.994 0 0 0 6 12.142V8.858c1.72-.447 3-2 3-3.858 0-2.206-1.794-4-4-4S1 2.794 1 5c0 1.858 1.28 3.41 3 3.858v3.284c-1.72.447-3 2-3 3.858 0 2.206 1.794 4 4 4 1.859 0 3.41-1.28 3.858-3h3.284A3.994 3.994 0 0 0 15 19.858v3.284c-1.72.447-3 2-3 3.858 0 2.206 1.794 4 4 4 1.859 0 3.41-1.28 3.858-3h3.284c.447 1.72 2 3 3.858 3 2.206 0 4-1.794 4-4s-1.794-4-4-4z"
-                                                      fill="#4353FF"/>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <h4 class="feature-title m-0">Discover</h4>
-                                </div>
-                                <p class="text-sm mb-0">A pseudo-Latin text used in web design, layout, and printing in
-                                    place of things to emphasise design elements.</p>
-                            </div>
-                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/2.jpg" alt="...">
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Explore</div>
+                        <div class="portfolio-caption-subheading text-muted">Graphic Design</div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-bg">
-            <svg width="385" height="305" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <linearGradient x1="50%" y1="34.994%" x2="50%" y2="97.738%" id="footer-bg">
-                        <stop stop-color="#151616" offset="0%"/>
-                        <stop stop-color="#222424" offset="100%"/>
-                    </linearGradient>
-                </defs>
-                <path d="M384.557 116.012V305H0L210.643 0l173.914 116.012z" fill="url(#footer-bg)" fill-rule="evenodd"/>
-            </svg>
-        </div>
-        <div class="footer-dots is-moving-object is-translating" data-translating-factor="160">
-            <svg width="69" height="91" xmlns="http://www.w3.org/2000/svg">
-                <g fill="#43F1FF" fill-rule="evenodd">
-                    <path d="M37.105 41.007l-2.9 1.334-.786 2.823.926 2.689 2.76 1.154 2.6-1.31 1.714-2.533-1.296-2.94z"/>
-                    <path fill-opacity=".64"
-                          d="M63.109 27.24l-1.45.666-.394 1.412.464 1.344 1.38.577 1.3-.655.856-1.266-.647-1.47z"/>
-                    <path fill-opacity=".24"
-                          d="M66.226 86.638l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                    <path fill-opacity=".64"
-                          d="M13.497 43.713l-2.175 1-.59 2.118.695 2.016 2.07.866 1.95-.983 1.285-1.9-.972-2.204z"/>
-                    <path fill-opacity=".8"
-                          d="M59.076 56.658l-2.175 1-.59 2.117.695 2.017 2.07.866 1.949-.983 1.286-1.9-.972-2.204z"/>
-                    <path fill-opacity=".48"
-                          d="M22.262 18.49l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                    <path fill-opacity=".64"
-                          d="M23.422.5l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47z"/>
-                    <path fill-opacity=".48"
-                          d="M2.637 12.5l-1.45.667-.393 1.412.463 1.344 1.38.577 1.3-.655.857-1.266-.648-1.47zM36.563 10.856l-.725.334-.197.706.232.672.69.288.65-.327.428-.633-.324-.735z"/>
-                </g>
-            </svg>
-        </div>
-        <div class="container">
-            <div class="site-footer-inner has-top-divider">
-                <div class="footer-copyright">&copy; 2022 AITU</div>
-                <ul class="footer-social-links list-reset">
-                    <li>
-                        <a href="#">
-                            <span class="screen-reader-text">Facebook</span>
-                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.023 16L6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023z"
-                                      fill="#FFFFFF"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="screen-reader-text">Twitter</span>
-                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z"
-                                      fill="#FFFFFF"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="screen-reader-text">Google</span>
-                            <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z"
-                                      fill="#FFFFFF"/>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 3-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/3.jpg" alt="...">
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Finish</div>
+                        <div class="portfolio-caption-subheading text-muted">Identity</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+                <!-- Portfolio item 4-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/4.jpg" alt="...">
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Lines</div>
+                        <div class="portfolio-caption-subheading text-muted">Branding</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+                <!-- Portfolio item 5-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/5.jpg" alt="...">
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Southwest</div>
+                        <div class="portfolio-caption-subheading text-muted">Website Design</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <!-- Portfolio item 6-->
+                <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <svg class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"></path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="assets/img/portfolio/6.jpg" alt="...">
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">Window</div>
+                        <div class="portfolio-caption-subheading text-muted">Photography</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
+<!-- About-->
+<section class="page-section" id="about">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">About</h2>
+            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg"
+                                                 alt="..."></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>2009-2011</h4>
+                        <h4 class="subheading">Our Humble Beginnings</h4>
+                    </div>
+                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae
+                        sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg"
+                                                 alt="..."></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>March 2011</h4>
+                        <h4 class="subheading">An Agency is Born</h4>
+                    </div>
+                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae
+                        sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg"
+                                                 alt="..."></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>December 2015</h4>
+                        <h4 class="subheading">Transition to Full Service</h4>
+                    </div>
+                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae
+                        sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg"
+                                                 alt="..."></div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>July 2020</h4>
+                        <h4 class="subheading">Phase Two Expansion</h4>
+                    </div>
+                    <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae
+                        sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image">
+                    <h4>
+                        Be Part
+                        <br>
+                        Of Our
+                        <br>
+                        Story!
+                    </h4>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Team-->
+<section class="page-section bg-light" id="team">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="...">
+                    <h4>Parveen Anand</h4>
+                    <p class="text-muted">Lead Designer</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Twitter Profile">
+                        <svg class="svg-inline--fa fa-twitter" aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"></path>
+                        </svg><!-- <i class="fab fa-twitter"></i> Font Awesome fontawesome.com --></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand Facebook Profile">
+                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                             data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path>
+                        </svg><!-- <i class="fab fa-facebook-f"></i> Font Awesome fontawesome.com --></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Parveen Anand LinkedIn Profile">
+                        <svg class="svg-inline--fa fa-linkedin-in" aria-hidden="true" focusable="false"
+                             data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M100.3 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.6 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.3 61.9 111.3 142.3V448z"></path>
+                        </svg><!-- <i class="fab fa-linkedin-in"></i> Font Awesome fontawesome.com --></a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="...">
+                    <h4>Diana Petersen</h4>
+                    <p class="text-muted">Lead Marketer</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Twitter Profile">
+                        <svg class="svg-inline--fa fa-twitter" aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"></path>
+                        </svg><!-- <i class="fab fa-twitter"></i> Font Awesome fontawesome.com --></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen Facebook Profile">
+                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                             data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path>
+                        </svg><!-- <i class="fab fa-facebook-f"></i> Font Awesome fontawesome.com --></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Diana Petersen LinkedIn Profile">
+                        <svg class="svg-inline--fa fa-linkedin-in" aria-hidden="true" focusable="false"
+                             data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M100.3 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.6 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.3 61.9 111.3 142.3V448z"></path>
+                        </svg><!-- <i class="fab fa-linkedin-in"></i> Font Awesome fontawesome.com --></a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="...">
+                    <h4>Larry Parker</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Twitter Profile">
+                        <svg class="svg-inline--fa fa-twitter" aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                             data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"></path>
+                        </svg><!-- <i class="fab fa-twitter"></i> Font Awesome fontawesome.com --></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker Facebook Profile">
+                        <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab"
+                             data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                             data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path>
+                        </svg><!-- <i class="fab fa-facebook-f"></i> Font Awesome fontawesome.com --></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Larry Parker LinkedIn Profile">
+                        <svg class="svg-inline--fa fa-linkedin-in" aria-hidden="true" focusable="false"
+                             data-prefix="fab" data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 448 512" data-fa-i2svg="">
+                            <path fill="currentColor"
+                                  d="M100.3 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.6 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.3 61.9 111.3 142.3V448z"></path>
+                        </svg><!-- <i class="fab fa-linkedin-in"></i> Font Awesome fontawesome.com --></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet,
+                consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam
+                corporis ea, alias ut unde.</p></div>
+        </div>
+    </div>
+</section>
+<!-- Clients-->
+<div class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/microsoft.svg"
+                                  alt="..." aria-label="Microsoft Logo"></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/google.svg"
+                                  alt="..." aria-label="Google Logo"></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg"
+                                  alt="..." aria-label="Facebook Logo"></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/ibm.svg" alt="..."
+                                  aria-label="IBM Logo"></a>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Contact-->
+<section class="page-section" id="contact">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Contact Us</h2>
+            <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+        </div>
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- * * SB Forms Contact Form * *-->
+        <!-- * * * * * * * * * * * * * * *-->
+        <!-- This form is pre-integrated with SB Forms.-->
+        <!-- To make this form functional, sign up at-->
+        <!-- https://startbootstrap.com/solution/contact-forms-->
+        <!-- to get an API token!-->
+        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+            <div class="row align-items-stretch mb-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <!-- Name input-->
+                        <input class="form-control" id="name" type="text" placeholder="Your Name *"
+                               data-sb-validations="required" data-sb-can-submit="no">
+                        <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                    </div>
+                    <div class="form-group">
+                        <!-- Email address input-->
+                        <input class="form-control" id="email" type="email" placeholder="Your Email *"
+                               data-sb-validations="required,email" data-sb-can-submit="no">
+                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                    </div>
+                    <div class="form-group mb-md-0">
+                        <!-- Phone number input-->
+                        <input class="form-control" id="phone" type="tel" placeholder="Your Phone *"
+                               data-sb-validations="required" data-sb-can-submit="no">
+                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group form-group-textarea mb-md-0">
+                        <!-- Message input-->
+                        <textarea class="form-control" id="message" placeholder="Your Message *"
+                                  data-sb-validations="required" data-sb-can-submit="no"></textarea>
+                        <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Submit success message-->
+            <!---->
+            <!-- This is what your users will see when the form-->
+            <!-- has successfully submitted-->
+            <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center text-white mb-3">
+                    <div class="fw-bolder">Form submission successful!</div>
+                    To activate this form, sign up at
+                    <br>
+                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                </div>
+            </div>
+            <!-- Submit error message-->
+            <!---->
+            <!-- This is what your users will see when there is-->
+            <!-- an error submitting the form-->
+            <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Error sending message!</div>
+            </div>
+            <!-- Submit Button-->
+            <div class="text-center">
+                <button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send
+                    Message
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Footer-->
+<footer class="footer py-4">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start">Copyright © Your Website 2022</div>
+            <div class="col-lg-4 my-3 my-lg-0">
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter">
+                    <svg class="svg-inline--fa fa-twitter" aria-hidden="true" focusable="false" data-prefix="fab"
+                         data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                         data-fa-i2svg="">
+                        <path fill="currentColor"
+                              d="M459.4 151.7c.325 4.548 .325 9.097 .325 13.65 0 138.7-105.6 298.6-298.6 298.6-59.45 0-114.7-17.22-161.1-47.11 8.447 .974 16.57 1.299 25.34 1.299 49.06 0 94.21-16.57 130.3-44.83-46.13-.975-84.79-31.19-98.11-72.77 6.498 .974 12.99 1.624 19.82 1.624 9.421 0 18.84-1.3 27.61-3.573-48.08-9.747-84.14-51.98-84.14-102.1v-1.299c13.97 7.797 30.21 12.67 47.43 13.32-28.26-18.84-46.78-51.01-46.78-87.39 0-19.49 5.197-37.36 14.29-52.95 51.65 63.67 129.3 105.3 216.4 109.8-1.624-7.797-2.599-15.92-2.599-24.04 0-57.83 46.78-104.9 104.9-104.9 30.21 0 57.5 12.67 76.67 33.14 23.72-4.548 46.46-13.32 66.6-25.34-7.798 24.37-24.37 44.83-46.13 57.83 21.12-2.273 41.58-8.122 60.43-16.24-14.29 20.79-32.16 39.31-52.63 54.25z"></path>
+                    </svg><!-- <i class="fab fa-twitter"></i> Font Awesome fontawesome.com --></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook">
+                    <svg class="svg-inline--fa fa-facebook-f" aria-hidden="true" focusable="false" data-prefix="fab"
+                         data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"
+                         data-fa-i2svg="">
+                        <path fill="currentColor"
+                              d="M279.1 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.4 0 225.4 0c-73.22 0-121.1 44.38-121.1 124.7v70.62H22.89V288h81.39v224h100.2V288z"></path>
+                    </svg><!-- <i class="fab fa-facebook-f"></i> Font Awesome fontawesome.com --></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn">
+                    <svg class="svg-inline--fa fa-linkedin-in" aria-hidden="true" focusable="false" data-prefix="fab"
+                         data-icon="linkedin-in" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                         data-fa-i2svg="">
+                        <path fill="currentColor"
+                              d="M100.3 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.6 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.3 61.9 111.3 142.3V448z"></path>
+                    </svg><!-- <i class="fab fa-linkedin-in"></i> Font Awesome fontawesome.com --></a>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
+                <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Portfolio Modals-->
+<!-- Portfolio item 1 modal popup-->
+<div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/1.jpg" alt="...">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Threads
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Illustration
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <svg class="svg-inline--fa fa-xmark me-1" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg><!-- <i class="fas fa-xmark me-1"></i> Font Awesome fontawesome.com -->
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio item 2 modal popup-->
+<div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/2.jpg" alt="...">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Explore
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Graphic Design
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <svg class="svg-inline--fa fa-xmark me-1" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg><!-- <i class="fas fa-xmark me-1"></i> Font Awesome fontawesome.com -->
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio item 3 modal popup-->
+<div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/3.jpg" alt="...">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Finish
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Identity
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <svg class="svg-inline--fa fa-xmark me-1" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg><!-- <i class="fas fa-xmark me-1"></i> Font Awesome fontawesome.com -->
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio item 4 modal popup-->
+<div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/4.jpg" alt="...">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Lines
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Branding
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <svg class="svg-inline--fa fa-xmark me-1" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg><!-- <i class="fas fa-xmark me-1"></i> Font Awesome fontawesome.com -->
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio item 5 modal popup-->
+<div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/5.jpg" alt="...">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Southwest
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Website Design
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <svg class="svg-inline--fa fa-xmark me-1" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg><!-- <i class="fas fa-xmark me-1"></i> Font Awesome fontawesome.com -->
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Portfolio item 6 modal popup-->
+<div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal">
+            </div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="modal-body">
+                            <!-- Project details-->
+                            <h2 class="text-uppercase">Project Name</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/6.jpg" alt="...">
+                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt
+                                repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae,
+                                nostrum, reiciendis facere nemo!</p>
+                            <ul class="list-inline">
+                                <li>
+                                    <strong>Client:</strong>
+                                    Window
+                                </li>
+                                <li>
+                                    <strong>Category:</strong>
+                                    Photography
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                <svg class="svg-inline--fa fa-xmark me-1" aria-hidden="true" focusable="false"
+                                     data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg"
+                                     viewBox="0 0 320 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                          d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"></path>
+                                </svg><!-- <i class="fas fa-xmark me-1"></i> Font Awesome fontawesome.com -->
+                                Close Project
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-<script src="{% static 'onlineCoding/dist/js/main.min.js' %}"></script>
+
 </body>
 </html>
