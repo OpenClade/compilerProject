@@ -86,7 +86,8 @@ class TextEditorView(generics.ListCreateAPIView):
 
 
 def index(request):
-    return render(request, 'onlineCoding/welcome.html')
+    courses = Course.objects.all()
+    return render(request, 'onlineCoding/index.html', {'courses': courses})
 
 
 def loginPage(request):
