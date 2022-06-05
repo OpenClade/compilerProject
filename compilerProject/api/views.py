@@ -156,7 +156,6 @@ def problems(request):
 
 
 def textEditor(request, slug):
-    
     if request.method == 'GET':
         task = get_object_or_404(ProgrammingTask, slug=slug)
         form = ProgrammingTaskSolutionForm()
@@ -197,16 +196,18 @@ def textEditor(request, slug):
                               'error': "You have already solved this task"
                           }
                           )
-        
+
         tests = Tests.objects.all().filter(task=task)
         data = request.POST['code']
-        if request.POST['file_input']:
-            file = request.POST['file_input']
+
+        if request.FILES.get('file'):
+            file = request.FILES.get('file')
+            print(file)
             data = file.read().decode('utf-8')
 
         for test in tests:
             start = time.time()
-            
+
             try:
                 old_stdout = sys.stdout
                 x = StringIO()
@@ -214,11 +215,12 @@ def textEditor(request, slug):
                 exec(f"task = \"{first_test.input_data}\"\n" + data + "\n" + "print(submit({first_test.input_data}))")
                 sys.stdout = old_stdout
             except Exception as e:
-                return render(request, 'onlineCoding/textEditor.html', {'task': task, 'type': 'danger', 'error': str(e)})
+                return render(request, 'onlineCoding/textEditor.html',
+                              {'task': task, 'type': 'danger', 'error': str(e)})
             end = time.time()
             if end - start > test.task.time_limit:
                 return render(request, 'onlineCoding/textEditor.html',
-                          {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
+                              {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
 
             mystdout = mystdout.getvalue().replace("\n", "")
             if test.output_data.strip() != mystdout.strip():
@@ -244,12 +246,12 @@ def textEditor(request, slug):
             student.rating += task.rating
             student.save()
         first_test = Tests.objects.all().filter(task=task).first()
-        
+
         return render(request, 'onlineCoding/textEditor.html',
                       {'task': task, 'first_test': first_test, 'form': form, 'type': 'success',
                        'answer': f"Correct!"})
 
-        
+
 
     elif request.method == 'POST' and 'run' in request.POST and request.user.is_authenticated and request.POST['code']:
         print(request.POST)
@@ -265,7 +267,7 @@ def submit(s):
         """
         start = time.time()
         x = StringIO()
-        
+
         data = request.POST['code']
         if request.POST.get(['input_file'][0]):
             print(request.FILES)
@@ -279,10 +281,10 @@ def submit(s):
             exec(f"task = \"{first_test.input_data}\"\n" + data + "\n" + "print(submit({first_test.input_data}))")
             sys.stdout = old_stdout
         except Exception as e:
-            
+
             return render(request, 'onlineCoding/textEditor.html', {'task': task, 'type': 'danger', 'error': str(e)})
         end = time.time()
-        
+
         mystdout = mystdout.getvalue().replace("\n", "")
         test = Tests.objects.all().filter(task=task).first()
         if test.output_data.strip() != mystdout.strip():
@@ -291,7 +293,7 @@ def submit(s):
 
         first_test = Tests.objects.all().filter(task=task).first()
         if end - start > first_test.task.time_limit:
-                return render(request, 'onlineCoding/textEditor.html',
+            return render(request, 'onlineCoding/textEditor.html',
                           {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
 
         return render(request, 'onlineCoding/textEditor.html',
@@ -355,7 +357,6 @@ def not_found_view(request):
 
 
 def teacher(request):
-    
     if request.user.is_authenticated:
         if request.method == 'GET' and Teacher.objects.all().filter(user=request.user).exists():
             form = CourseForm()
@@ -379,7 +380,8 @@ def teacher(request):
             elif 'add_task' in request.POST:
                 task = ProgrammingTask.objects.create(name=request.POST['name'],
                                                       description=request.POST['description'],
-                                                      course=Course.objects.all().filter(slug=request.POST['course']).first(),
+                                                      course=Course.objects.all().filter(
+                                                          slug=request.POST['course']).first(),
                                                       teacher=teacher,
                                                       time_limit=request.POST['time_limit'],
                                                       max_plagiarism=request.POST['max_plagiarism'],
@@ -396,11 +398,12 @@ def teacher(request):
                                                  author=teacher.user)
                 chapter.save()
                 return redirect('teacher')
-                
+
             elif 'add_test' in request.POST:
                 test = Tests.objects.create(input_data=request.POST['input_data'],
                                             output_data=request.POST['output_data'],
-                                            task=ProgrammingTask.objects.all().filter(slug=request.POST['task']).first())
+                                            task=ProgrammingTask.objects.all().filter(
+                                                slug=request.POST['task']).first())
                 test.save()
                 return redirect('teacher')
             elif 'add_course' in request.POST:
