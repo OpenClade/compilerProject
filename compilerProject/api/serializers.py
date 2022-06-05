@@ -50,6 +50,7 @@ class UserForm(forms.Form):
 
 class ProgrammingTaskSolutionForm(forms.Form):
     code = forms.CharField(widget=forms.Textarea, max_length=10000, required=False)
+    code.widget.attrs['display'] = 'none'
     file = forms.FileField(required=False)
     file.widget.attrs['class'] = 'custom-file-input'
 

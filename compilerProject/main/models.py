@@ -77,7 +77,7 @@ class Course(models.Model):
     is_public = models.BooleanField(default=False)
     is_deleted = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    banner = models.ImageField(upload_to='img', null=True, blank=True)
+    banner = models.ImageField(upload_to='courses', null=True, blank=True)
 
     def __str__(self):
         return self.title

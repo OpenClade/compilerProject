@@ -19,6 +19,9 @@
     {% for chapter in chapters %}
         <div class="card shadow mb-2">
             <div class="card-body">
+                {% if chapter.banner %}
+                    <img src="/img/{{ chapter.banner }}" class="card-image" style="width:100%;">
+                {% endif %}
                 <h6>#{{ chapter.id }} {{ chapter.title }}</h6>
                 <b>Description: </b>
                 <p>{{ chapter.description }}</p>

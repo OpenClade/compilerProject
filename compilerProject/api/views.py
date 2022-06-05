@@ -216,16 +216,36 @@ def textEditor(request, slug):
                 sys.stdout = old_stdout
             except Exception as e:
                 return render(request, 'onlineCoding/textEditor.html',
-                              {'task': task, 'type': 'danger', 'error': str(e)})
+                              {
+                                  'task': task,
+                                  'type': 'danger',
+                                  'first_test': first_test,
+                                  'form': form,
+                                  'error': str(e),
+                              }
+                              )
             end = time.time()
             if end - start > test.task.time_limit:
                 return render(request, 'onlineCoding/textEditor.html',
-                              {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
+                              {
+                                  'task': task,
+                                  'first_test': first_test,
+                                  'form': form,
+                                  'type': 'danger',
+                                  'error': "Time limit exceeded"
+                              }
+                              )
 
             mystdout = mystdout.getvalue().replace("\n", "")
             if test.output_data.strip() != mystdout.strip():
                 return render(request, 'onlineCoding/textEditor.html',
-                              {'task': task, 'type': 'danger', 'error': "Wrong answer!"})
+                              {
+                                  'first_test': first_test,
+                                  'task': task,
+                                  'form': form,
+                                  'type': 'danger',
+                                  'error': "Wrong answer!"
+                              })
         solutions = ProgrammingTaskSolution.objects.all()
 
         obj = ProgrammingTaskSolution.objects.create(code=request.POST['code'], task=task, author=request.user)
@@ -248,8 +268,14 @@ def textEditor(request, slug):
         first_test = Tests.objects.all().filter(task=task).first()
 
         return render(request, 'onlineCoding/textEditor.html',
-                      {'task': task, 'first_test': first_test, 'form': form, 'type': 'success',
-                       'answer': f"Correct!"})
+                      {
+                          'task': task,
+                          'first_test': first_test,
+                          'form': form,
+                          'type': 'success',
+                          'answer': f"Correct!"
+                      }
+                      )
 
 
 
@@ -282,22 +308,51 @@ def submit(s):
             sys.stdout = old_stdout
         except Exception as e:
 
-            return render(request, 'onlineCoding/textEditor.html', {'task': task, 'type': 'danger', 'error': str(e)})
+            return render(request, 'onlineCoding/textEditor.html',
+                          {
+                              'task': task,
+                              'first_test': first_test,
+                              'form': form,
+                              'type': 'danger',
+                              'error': str(e)
+                          }
+                          )
         end = time.time()
 
         mystdout = mystdout.getvalue().replace("\n", "")
         test = Tests.objects.all().filter(task=task).first()
         if test.output_data.strip() != mystdout.strip():
+            form.__setattr__('display', 'none')
             return render(request, 'onlineCoding/textEditor.html',
-                          {'task': task, 'type': 'danger', 'error': "Wrong answer!"})
+                          {
+                              'task': task,
+                              'first_test': first_test,
+                              'form': form,
+                              'type': 'danger',
+                              'error': "Wrong answer!"
+                          })
 
         first_test = Tests.objects.all().filter(task=task).first()
         if end - start > first_test.task.time_limit:
             return render(request, 'onlineCoding/textEditor.html',
-                          {'task': task, 'type': 'danger', 'error': "Time limit exceeded"})
+                          {
+                              'task': task,
+                              'form': form,
+                              'first_test': first_test,
+                              'type': 'danger',
+                              'error': "Time limit exceeded"
+                          }
+                          )
 
         return render(request, 'onlineCoding/textEditor.html',
-                      {'task': task, 'first_test': first_test, 'form': form, 'type': 'success', 'answer': "Correct!"})
+                      {
+                          'task': task,
+                          'first_test': first_test,
+                          'form': form,
+                          'type': 'success',
+                          'answer': "Correct!"
+                      }
+                      )
     # else:
     #     return render(request, 'onlineCoding/textEditor.html',
     #                   {'task': task, 'form': form, 'answer': "you are not right!"})
@@ -342,7 +397,7 @@ def courses(request):
 
 def coursePage(request, slug):
     course = get_object_or_404(Course, slug=slug)
-    chapters = Chapter.objects.all().filter(course=course)
+    chapters = Chapter.objects.all().filter(course=course).order_by('created_at')
     tasks = ProgrammingTask.objects.all().filter(course=course)
     return render(request, 'onlineCoding/coursePage.html', {'course': course, 'chapters': chapters, 'tasks': tasks})
 
@@ -392,7 +447,7 @@ def teacher(request):
                 chapter = Chapter.objects.create(title=request.POST['title'],
                                                  description=request.POST['description'],
                                                  slug=request.POST['slug'],
-                                                 banner=request.POST['banner'],
+                                                 banner=request.FILES['banner'],
                                                  course=Course.objects.all().filter(id=request.POST['course']).first(),
                                                  information=request.POST['information'],
                                                  author=teacher.user)
@@ -410,7 +465,7 @@ def teacher(request):
                 course = Course.objects.create(title=request.POST['title'],
                                                description=request.POST['description'],
                                                slug=request.POST['slug'],
-                                               banner=request.POST['banner'],
+                                               banner=request.FILES['banner'],
                                                author=teacher.user)
                 course.save
 
