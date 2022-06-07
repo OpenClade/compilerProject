@@ -4,7 +4,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from api.serializers import *
 from main.models import *
-
+from django.contrib.auth.models import AnonymousUser
 from user.models import User, Teacher, Student
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -325,13 +325,7 @@ def leaderboard(request):
             if u.user.email == currentUser.user.email:
                 break
             place += 1
-    return render(request, 'onlineCoding/leaderboard.html',
-                  {
-                      'users': users,
-                      'place': place,
-                      'currentUser': currentUser
-                  })
-
+    return render(request, 'onlineCoding/leaderboard.html', {'users': users, 'place': place, currentUser: currentUser})
 
 def courses(request):
     courses = Course.objects.all()
