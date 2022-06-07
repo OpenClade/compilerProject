@@ -46,137 +46,140 @@
         all information about student of teacher users_of_teachers
     {% endcomment %}
     <div class="container">
-        <h2>All users of teacher</h2>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <thead>
+    <h2>All users of teacher</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Group</th>
+                    <th>Role</th>
+                    <th>Teacher</th>
+                    <th>Rating</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for user in users_of_teachers %}
                     <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Email</th> 
-                        <th>Group</th>
-                        <th>Role</th>
-                        <th>Teacher</th> 
-                        <th>Rating</th>
+                        <td>{{ user.user.first_name }}</td>
+                        <td>{{ user.user.surname }}</td>
+                        <td>{{ user.user.group }}</td>
+                        <td>{{ user.user.email }}</td>
+                        <td>{{ user.user.role }}</td>
+                        <td>{{ teacher.user.first_name }}</td>
+                        <td>{{ user.rating }}</td>
 
                     </tr>
-                    </thead>
-                    <tbody>
 
-                    {% for user in users_of_teachers %}
-                        <tr>
-                            <td>{{ user.user.first_name }}</td>
-                            <td>{{ user.user.surname }}</td>
-                            <td>{{ user.user.group }}</td>
-                            <td>{{ user.user.email }}</td> 
-                            <td>{{ user.user.role }}</td>
-                            <td>{{ teacher.user.first_name }}</td> 
-                            <td>{{ user.rating }}</td>
+                {% endfor %}
 
-                        </tr>
-
-                    {% endfor %}
-
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
 
-{% comment %}
+    {% comment %}
 
    add course to teacher
 
     {% endcomment %}
     <div class="container">
-        <h2>Add course to student</h2>
-        <div class="row">
-            <div class="col-md-12">
-                <form method="post">
-                    {% csrf_token %}
-                          {% comment %}
+    <h2>Add course to student</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% comment %}
                                 # title description slug time_limit memory_limit author language 
                                 # create form
                                 {% endcomment %}
-                           <form method="post">
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="slug">Slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
-                            </div>
-                            <div class="form-group">
-                                <label for="banner">Banner</label>
-                                <input type="file" class="form-control" id="banner" name="banner" placeholder="Banner">
-                            </div>
-                            <div class="form-group">
-                                <label for="language">Language</label>
-                                <input type="text" class="form-control" id="language" name="language" placeholder="Language">
-                            </div>
-                            <button type="submit" name="add_course" class="btn btn-default">Submit</button>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description"
+                                  placeholder="Description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="slug">Slug</label>
+                        <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+                    </div>
+                    <div class="form-group">
+                        <label for="banner">Banner</label>
+                        <input type="file" class="form-control" id="banner" name="banner" placeholder="Banner">
+                    </div>
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <input type="text" class="form-control" id="language" name="language" placeholder="Language">
+                    </div>
+                    <button type="submit" name="add_course" class="btn btn-default">Submit</button>
 
                 </form>
-            </div>
         </div>
+    </div>
     {% comment %}
 
         add chapter to course with fields title description slug banner course information
     {% endcomment %}
     <div class="container">
-        <h2>Add chapter to course</h2>
-        <div class="row">
-            <div class="col-md-12">
-                <form method="post">
-                    {% csrf_token %}
-                          {% comment %}
+    <h2>Add chapter to course</h2>
+    <div class="row">
+    <div class="col-md-12">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %}
                                 # title description slug time_limit memory_limit author language 
                                 # create form
                                 {% endcomment %}
-                           <form method="post">
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" id="description" name="description" placeholder="Description"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="slug">Slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
-                            </div>
-                            {% comment%}
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description"
+                              placeholder="Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="slug">Slug</label>
+                    <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+                </div>
+                {% comment%}
                                 add image banner to chapter
                                 {% endcomment %}
-                            
-                                <div class="form-group">
-                                <label for="banner">Banner</label>
-                                <input type="file" class="form-control" id="banner" name="banner" placeholder="Banner">
-                            </div>
+
+                <div class="form-group">
+                    <label for="banner">Banner</label>
+                    <input type="file" class="form-control" id="banner" name="banner" placeholder="Banner">
+                </div>
 
 
-                                <div class="form-group">
-                                <label for="course">Course</label>
-                                <select class="form-control" id="course" name="course">
-                                    {% for course in courses %}
-                                        <option value="{{ course.id }}">{{ course.title }}</option>
-                                    {% endfor %}
-                                </select>
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <select class="form-control" id="course" name="course">
+                        {% for course in courses %}
+                            <option value="{{ course.id }}">{{ course.title }}</option>
+                        {% endfor %}
+                    </select>
 
-                            <div class="form-group">
-                                <label for="information">Information</label>
-                                <textarea class="form-control" id="information" name="information" placeholder="Information"></textarea>
-                            </div>
-                            <button type="submit" name="add_chapter" class="btn btn-default">Submit</button>
+                    <div class="form-group">
+                        <label for="information">Information</label>
+                        <textarea class="form-control" id="information" name="information"
+                                  placeholder="Information"></textarea>
+                    </div>
+                    <button type="submit" name="add_chapter" class="btn btn-default">Submit</button>
 
-                </form>
-            </div>
+            </form>
+    </div>
 {% endblock %}
 
 {% block after_script %}

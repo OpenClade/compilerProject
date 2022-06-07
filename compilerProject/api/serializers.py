@@ -2,9 +2,11 @@
 from enum import unique
 from pkg_resources import require
 from rest_framework import serializers
-from main.models import * 
+from main.models import *
 from user.models import *
 from django import forms
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -16,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+
 
 class ProgrammingTaskSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,10 +32,6 @@ class ProgrammingTaskSolutionSerializer(serializers.ModelSerializer):
         model = ProgrammingTaskSolution
         fields = ("id", "task", "author", "language", "code", "is_public", "created_at")
         extra_kwargs = {'author': {'read_only': True}}
-
-
-
-
 
 
 class UserForm(forms.Form):
@@ -50,9 +49,11 @@ class UserForm(forms.Form):
 
 
 class ProgrammingTaskSolutionForm(forms.Form):
-   
-    code = forms.CharField(widget=forms.Textarea, max_length=10000, required=True )
+    code = forms.CharField(widget=forms.Textarea, max_length=10000, required=False)
+    code.widget.attrs['display'] = 'none'
     file = forms.FileField(required=False)
+    file.widget.attrs['class'] = 'custom-file-input'
+
     class Meta:
         model = ProgrammingTaskSolution
         fields = ("code", "file")
@@ -71,7 +72,7 @@ class CourseForm(forms.Form):
     description = forms.TextInput()
     slug = forms.SlugField(max_length=100)
     banner = forms.ImageField()
-    
+
     class Meta:
         model = Course
         fields = ('title', 'description', 'slug', 'banner')

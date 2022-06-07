@@ -58,28 +58,45 @@
     {% if request.user.is_authenticated %}
         {% if type != 'warning' and type != 'success' %}
 
-            <form style="position: relative; margin-top: .5em;" action="{{ task.slug }}" method="post">
-                {% csrf_token %}
-                {{ form.code }}
-                {% comment %}
+            <form style="position: relative; margin-top: .5em;" action="{{ task.slug }}" method="post"
+                  enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.code }}
+            {% comment %}
                 create 2 buttons, one for submit and one for run
                 {% endcomment %}
-                <button type="submit" name="submit" class="btn btn-primary" style="position: absolute; right: 1;">Submit</button>
-                <button type="submit" name="run" class="btn btn-primary" style="position: absolute; right: 0;">Run</button>
-            
-                {{ form.file }}
+            <br>
+            <button type="submit" name="run" class="btn btn-primary">Run</button>
+            <br>
+            <br>
+            <div class="row border p-4 ml-1">
+
+                <label>Upload file with solution</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        {{ form.file }}
+                        <label class="custom-file-label" for="id_file">Choose file</label>
+                    </div>
+                    <button type="submit" name="submit" class="btn  btn-outline-primary">Submit</button>
+                </div>
+
                 {% comment%}
-                    input file 
+                    input file
                 {% endcomment %}
-                <hr> 
-            </form>
+                <hr>
+            </div>
         {% endif %}
-        {% if type == 'success' %}
-            <a href="/problems" class="btn btn-outline btn-primary mb-4">Back to problems</a>
-        {% endif %}
+    {% if type == 'success' %}
+        <div>
+            <button type="submit" name="submit" class="btn btn-outline-primary">Submit</button>
+            <a href="/problems" class="btn btn-outline btn-primary ">Back to problems</a>
+        </div>
+    {% endif %}
+    </form>
 
         {% if answer or error %}
-
+            <br>
             <div class="console">
                 <div class="console-top">
                     <span class="red"></span><span class="orange"></span><span class="green"></span>
@@ -101,8 +118,9 @@
             },
             lineNumbers: true,
             indentUnit: 4,
-            matchBrackets: true
+            matchBrackets: true,
         });
+        editor.getDoc().setValue('def submit(s):\n    ');
         editor.on('change', function () {
             document.getElementsByName("code")[0].innerText = editor.getValue();
         })
