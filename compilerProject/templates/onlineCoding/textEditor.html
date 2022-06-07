@@ -116,11 +116,15 @@
                 version: 3,
                 singleLineStringErrors: false
             },
+            
             lineNumbers: true,
             indentUnit: 4,
             matchBrackets: true,
+            tabSize: 4,
         });
-        editor.getDoc().setValue('def submit(s):\n    ');
+         
+        editor.setValue('{{code}}');
+        
         editor.on('change', function () {
             document.getElementsByName("code")[0].innerText = editor.getValue();
         })

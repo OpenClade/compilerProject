@@ -193,7 +193,8 @@ def textEditor(request, slug):
                               'task': task,
                               'form': form,
                               'type': 'warning',
-                              'error': "You have already solved this task"
+                              'error': "You have already solved this task",
+                              "code" : request.POST['code']
                           }
                           )
 
@@ -222,6 +223,7 @@ def textEditor(request, slug):
                                   'first_test': first_test,
                                   'form': form,
                                   'error': str(e),
+                                  "code" : request.POST['code']
                               }
                               )
             end = time.time()
@@ -232,7 +234,8 @@ def textEditor(request, slug):
                                   'first_test': first_test,
                                   'form': form,
                                   'type': 'danger',
-                                  'error': "Time limit exceeded"
+                                  'error': "Time limit exceeded",
+                                  "code" : request.POST['code']
                               }
                               )
 
@@ -244,7 +247,8 @@ def textEditor(request, slug):
                                   'task': task,
                                   'form': form,
                                   'type': 'danger',
-                                  'error': "Wrong answer!"
+                                  'error': "Wrong answer!",
+                                  "code" : request.POST['code']
                               })
         solutions = ProgrammingTaskSolution.objects.all()
 
@@ -260,7 +264,7 @@ def textEditor(request, slug):
                     obj.save()
 
                     return render(request, 'onlineCoding/textEditor.html',
-                                  {'task': task, 'error': 'plagiarism detected'})
+                                  {'task': task, 'error': 'plagiarism detected',  "code" : request.POST['code']})
         student = Student.objects.all().filter(user=request.user).first()
         if student:
             student.rating += task.rating
@@ -273,33 +277,24 @@ def textEditor(request, slug):
                           'first_test': first_test,
                           'form': form,
                           'type': 'success',
-                          'answer': f"Correct!"
+                          'answer': f"Correct!",
+                           "code" : request.POST['code']
                       }
                       )
 
 
 
     elif request.method == 'POST' and 'run' in request.POST and request.user.is_authenticated and request.POST['code']:
-        print(request.POST)
-        print(request.FILES)
+        print(request.POST['code'])
         # run code
         task = get_object_or_404(ProgrammingTask, slug=slug)
         form = ProgrammingTaskSolutionForm()
         first_test = Tests.objects.all().filter(task=task).first()
-        """
-def submit(s):
-    return "hello world"
-
-        """
         start = time.time()
         x = StringIO()
 
         data = request.POST['code']
-        if request.POST.get(['input_file'][0]):
-            print(request.FILES)
-            print(request.POST.get(['input_file'][0]))
-            file = request.POST['input_file']
-            data = file.read().decode('utf-8')
+          
 
         try:
             old_stdout = sys.stdout
@@ -314,7 +309,8 @@ def submit(s):
                               'first_test': first_test,
                               'form': form,
                               'type': 'danger',
-                              'error': str(e)
+                              'error': str(e),
+                              "code" : data,
                           }
                           )
         end = time.time()
@@ -322,14 +318,15 @@ def submit(s):
         mystdout = mystdout.getvalue().replace("\n", "")
         test = Tests.objects.all().filter(task=task).first()
         if test.output_data.strip() != mystdout.strip():
-            form.__setattr__('display', 'none')
+            print(1)
             return render(request, 'onlineCoding/textEditor.html',
                           {
                               'task': task,
                               'first_test': first_test,
                               'form': form,
                               'type': 'danger',
-                              'error': "Wrong answer!"
+                              'error': "Wrong answer!",
+                              "code" : data
                           })
 
         first_test = Tests.objects.all().filter(task=task).first()
@@ -340,7 +337,8 @@ def submit(s):
                               'form': form,
                               'first_test': first_test,
                               'type': 'danger',
-                              'error': "Time limit exceeded"
+                              'error': "Time limit exceeded",
+                               "code" : data
                           }
                           )
 
@@ -350,7 +348,8 @@ def submit(s):
                           'first_test': first_test,
                           'form': form,
                           'type': 'success',
-                          'answer': "Correct!"
+                          'answer': "Correct!",
+                          "code" : data
                       }
                       )
     # else:
@@ -382,7 +381,8 @@ def leaderboard(request):
             if u.user.email == currentUser.user.email:
                 break
             place += 1
-    return render(request, 'onlineCoding/leaderboard.html', {'users': users, 'place': place, currentUser: currentUser})
+        return render(request, 'onlineCoding/leaderboard.html', {'users': users, 'place': place, currentUser: currentUser})
+    return render(request, 'onlineCoding/leaderboard.html', {'users': users, 'place': place})
 
 def courses(request):
     courses = Course.objects.all()
